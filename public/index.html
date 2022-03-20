@@ -4,8 +4,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="icon" href="<%= BASE_URL %>assets/images/favicon.png" type="image/x-icon">
     <title><%= htmlWebpackPlugin.options.title %></title>
+
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendors/base/vendor.bundle.base.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/app.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/style.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/vue-good-table.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/vue2-daterange-picker.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/trevoreyre-autocomplete.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/vue-select.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/sweetalert/sweetalert2.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/theme-sugar.css">
+ 
+
+
   </head>
   <body>
     <noscript>
@@ -14,4 +30,12 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+
+  <script src='<%= BASE_URL %>assets/vendors/base/vendor.bundle.base.js'></script>
+  <script src='<%= BASE_URL %>assets/js/template.js'></script>
+  <script src='<%= BASE_URL %>assets/js/app.js'></script>
+  <script src='<%= BASE_URL %>assets/js/vueJquery.js'></script>
+  <script src='<%= BASE_URL %>assets/sweetalert/sweetalert2.js'></script>
+
+
 </html>
