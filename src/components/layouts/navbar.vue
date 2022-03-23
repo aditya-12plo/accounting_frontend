@@ -1,65 +1,97 @@
 <template>
     <div>
        
-       <nav class="navbar navbar-header navbar-expand navbar-light">
-                <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
-                <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav d-flex align-items-center navbar-light ml-auto">
-                        <li class="dropdown nav-icon">
-                            <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                                <div class="d-lg-inline-block">
-                                    <i data-feather="bell"></i>
-                                </div>
+       <div class="horizontal-menu">
+           <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+              <div class="container-fluid">
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                  <ul class="navbar-nav navbar-nav-left">
+                    <li class="nav-item ms-0 me-5 d-lg-flex d-none">
+                      <a href="#" class="nav-link horizontal-nav-left-menu"><i class="mdi mdi-format-list-bulleted"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                        <i class="mdi mdi-bell mx-0"></i>
+                        <span class="count bg-success">2</span>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                        <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-thumbnail">
+                              <div class="preview-icon bg-success">
+                                <i class="mdi mdi-information mx-0"></i>
+                              </div>
+                          </div>
+                          <div class="preview-item-content">
+                              <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                              <p class="font-weight-light small-text mb-0 text-muted">
+                                Just now
+                              </p>
+                          </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-thumbnail">
+                              <div class="preview-icon bg-warning">
+                                <i class="mdi mdi-settings mx-0"></i>
+                              </div>
+                          </div>
+                          <div class="preview-item-content">
+                              <h6 class="preview-subject font-weight-normal">Settings</h6>
+                              <p class="font-weight-light small-text mb-0 text-muted">
+                                Private message
+                              </p>
+                          </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                          <div class="preview-thumbnail">
+                              <div class="preview-icon bg-info">
+                                <i class="mdi mdi-account-box mx-0"></i>
+                              </div>
+                          </div>
+                          <div class="preview-item-content">
+                              <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                              <p class="font-weight-light small-text mb-0 text-muted">
+                                2 days ago
+                              </p>
+                          </div>
+                        </a>
+                      </div>
+                    </li>
+                    
+                  
+                   	
+                  </ul>
+                  <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                      <a class="navbar-brand brand-logo" href="/dashboard"><img src="/assets/images/logo-icdx.png" alt="icdx logo"/></a>
+                      <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="/assets/images/logo-icdx.png" alt="icdx logo"/></a>
+                  </div>
+                  <ul class="navbar-nav navbar-nav-right">
+                     
+                    
+                      <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                          <span class="nav-profile-name">Hi, {{this.name}}</span>
+                          <span class="online-status"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item">
+                              <i class="mdi mdi-settings text-primary"></i>
+                              Settings
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-large">
-                                <h6 class='py-2 px-4'>Notifications</h6>
-                                <ul class="list-group rounded-none">
-                                    <li class="list-group-item border-0 align-items-start">
-                                        <div class="avatar bg-success mr-3">
-                                            <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
-                                        </div>
-                                        <div>
-                                            <h6 class='text-bold'>New Order</h6>
-                                            <p class='text-xs'>
-                                                An order made by Ahmad Saugi for product Samsung Galaxy S69
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown nav-icon mr-2">
-                            <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                                <div class="d-lg-inline-block">
-                                    <i data-feather="mail"></i>
-                                </div>
+                            <a class="dropdown-item" @click="logout()">
+                              <i class="mdi mdi-logout text-primary"></i>
+                              Logout</a>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                                 
-                                <div class="d-none d-md-block d-lg-inline-block">Hi, {{this.name}}</div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#" @click="linkToSettings"><i data-feather="settings"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" @click="logout()"><i data-feather="log-out"></i> Logout</a>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                      </li>
+                  </ul>
+                  <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                    <span class="mdi mdi-menu"></span>
+                  </button>
                 </div>
+              </div>
             </nav>
+       </div>
       
     </div>
 </template>

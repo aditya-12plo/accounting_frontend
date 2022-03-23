@@ -204,6 +204,7 @@ export default {
                     localStorage.setItem('companyModels', JSON.stringify(this.companyModels))
                     window.location.href = '/dashboard';
                   }else{
+                    this.forms.captchaCode = ""
                     this.errors = response.data.errors;
                     this.refreshCaptchaCode();
                     this.resultError(response.data.errors);
@@ -211,6 +212,7 @@ export default {
               }).catch(error => {
                 this.loading();
                 if (error.response) {
+                    this.forms.captchaCode = ""
                   this.refreshCaptchaCode();
                   if(error.response.status === 422) {
                         this.errors = error.response.data.errors;

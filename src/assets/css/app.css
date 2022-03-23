@@ -69,6 +69,17 @@
  * 5. Utilities
  * 6. Responsive
  */
+
+
+#se-pre-con{ 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+
+} 
+
+
 .color-primary {
   color: #5A8DEE;
 }
@@ -111,13 +122,6 @@
 
 #app {
   position: relative;
-}
-
-#se-pre-con{
-  background-image: url('../images/loader.gif');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
 }
 
 #main {

@@ -1,47 +1,78 @@
 <template>
     <div>
-        <div id="app">
-  
-            <div id="sidebar" class='active'>
-                <div class="sidebar-wrapper active">
-                    <div class="sidebar-menu">
-
-                        <sidebar-component classMenu="Dashboard"></sidebar-component>
-
-                    </div>
-                    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-                </div>
-            </div>
 
 
-            <div id="main">
+        <!-- <div v-if="isLoading" class="se-pre-con"><img src="/assets/images/loading.gif" alt="Loading" /></div> -->
+       
+       <div v-if="isLoading" class="se-pre-con" style="text-align: center;"><center><img src="/assets/images/loading.gif" alt="Loading" /></center></div>
+        <div v-else class="container-scroller">
 
+            <!-- navbar -->
                 <navbar-component classMenu="Dashboard"></navbar-component>
 
-                <div class="main-content container-fluid">
-                    <div class="page-title">
-                        <h3>Dashboard</h3>
-                        <p class="text-subtitle text-muted">A good dashboard to display your statistics</p>
-                    </div>
-<a class="dropdown-item" @click="logout()"><i data-feather="log-out"></i> Logout</a>
-                </div>
+            <!-- //navbar -->
 
-                
+
+             <div class="container-fluid page-body-wrapper">
+                 <div class="main-panel">
+                     <div class="content-wrapper">
+
+
+                         <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Dashboard</h4>
+                  <p class="card-description">
+                    Basic form layout
+                  </p>
+                  <form class="forms-sample">
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Username</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputConfirmPassword1">Confirm Password</label>
+                      <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-check form-check-flat form-check-primary">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                        Remember me
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
             </div>
 
+
+                     </div>
+                 </div>
+             </div>
+
+
         </div>
-    
+  
+            
     </div>
 </template>
 
 <script>
-import sidebarComponent from './layouts/sidebar'
 import navbarComponent from './layouts/navbar'
 
 export default {
   name: 'Dashboard',
   components: {
-    'sidebar-component':sidebarComponent,
     'navbar-component':navbarComponent,
   },
   data () {
@@ -49,6 +80,7 @@ export default {
       maxToasts: 100,
       position: 'up right',
       closeBtn: true,  
+      isLoading: false,  
       errors: [],
       langs: ['id', 'en'],
       name:'',
@@ -58,6 +90,17 @@ export default {
 
     },
     methods: { 	
+
+        fade(sType){  	
+        this.isLoading = sType;
+        },
+
+        loading(){
+            this.fade(true);
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 100000); // hide the message after 3 seconds
+        },
 
       fetchIt() {
         // const userDatas = this.$getUserInfo();
@@ -78,8 +121,10 @@ export default {
  
     },
 	mounted() {
-      document.body.classList.add("sidebar-menu-collapsed");
-      this.fetchIt();
+    //   document.body.classList.add("sidebar-menu-collapsed");
+        this.fetchIt();
+        this.fade(true);
+        this.loading();
     }
 
 }

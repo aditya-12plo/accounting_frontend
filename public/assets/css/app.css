@@ -69,14 +69,16 @@
  * 5. Utilities
  * 6. Responsive
  */
+ 
+#se-pre-con{ 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 
+} 
+ 
 
-#se-pre-con{
-  background-image: url('../images/loader.gif');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
 
 .color-primary {
   color: #5A8DEE;

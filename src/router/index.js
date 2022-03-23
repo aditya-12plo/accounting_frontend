@@ -36,7 +36,7 @@ const routes = [
     component: ForgotPassword
   },
   {
-    path: "/reset-password/:token",
+    path: "/reset-password/:email/:token",
     meta: {
       title: "Accouting System",
       allowAnonymous: true
@@ -136,7 +136,7 @@ const router = new VueRouter({
 // This callback runs before every route change, including on page load.
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
-    if (to.name == 'Login' && isLoggedIn() || to.name == 'ForgotPassword' && isLoggedIn()) {
+    if (to.name == 'Login' && isLoggedIn() || to.name == 'ForgotPassword' && isLoggedIn() || to.name == 'ResetPassword' && isLoggedIn()) {
         next({ path: '/dashboard' })
     }
     else if (!to.meta.allowAnonymous && !isLoggedIn()) {
