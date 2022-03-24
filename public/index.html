@@ -9,21 +9,19 @@
 
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="<%= BASE_URL %>assets/vendors/base/vendor.bundle.base.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/style.bundle.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>assets/plugins/global/plugins.bundle.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/css/app.css">
-    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/style.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/css/vue-good-table.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/css/vue2-daterange-picker.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/css/trevoreyre-autocomplete.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/css/vue-select.css">
     <link rel="stylesheet" href="<%= BASE_URL %>assets/sweetalert/sweetalert2.css">
-    <link rel="stylesheet" href="<%= BASE_URL %>assets/css/theme-sugar.css">
  
 
 
   </head>
-  <body>
+  <body id="kt_body" style="background-image: url()" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled" data-kt-aside-minimize="on">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
@@ -31,11 +29,11 @@
     <!-- built files will be auto injected -->
   </body>
 
-  <script src='<%= BASE_URL %>assets/vendors/base/vendor.bundle.base.js'></script>
-  <script src='<%= BASE_URL %>assets/js/template.js'></script>
-  <script src='<%= BASE_URL %>assets/js/app.js'></script>
-  <script src='<%= BASE_URL %>assets/js/vueJquery.js'></script>
   <script src='<%= BASE_URL %>assets/sweetalert/sweetalert2.js'></script>
+  <script src='<%= BASE_URL %>assets/plugins/global/plugins.bundle.js'></script>
+  <script src='<%= BASE_URL %>assets/js/scripts.bundle.js'></script>
+  <script src='<%= BASE_URL %>assets/js/widgets.bundle.js'></script>
+  <script src='<%= BASE_URL %>assets/js/custom/widgets.js'></script>
 
 
 </html>

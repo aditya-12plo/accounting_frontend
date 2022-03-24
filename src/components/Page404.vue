@@ -6,7 +6,7 @@
             <div class="container text-center pt-32">
                 <h1 class='error-title'>404</h1>
                 <p>{{ $t('page404Desc') }}</p>
-                <a href="/" class='btn btn-primary'>{{$t('goHOmeDesc')}}</a>
+                <a :href="this.$settings.endPointApp" class='btn btn-primary'>{{$t('goHOmeDesc')}}</a>
             </div>
         </div>
          

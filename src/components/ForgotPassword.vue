@@ -2,96 +2,144 @@
     <div>
 
 
-        <div v-if="isLoading" class="se-pre-con"></div>
+<div class="d-flex flex-column flex-root">
+  <div class="page d-flex flex-row flex-column-fluid">
+    <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
-        <div class="container-scroller">
-            <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="main-panel">
-                <div class="content-wrapper d-flex align-items-center auth px-0">
-                <div class="row w-100 mx-0">
-                    <div class="col-lg-4 mx-auto">
-                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                        <div class="brand-logo text-center">
-                        ICDX GROUP ACCOUNTING & BUDGETING SYSTEM
+
+
+      <div v-if="isLoading">
+
+
+        <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}" style="animation-duration: 0.3s;"></div>
+
+        <!--begin::Loading Content-->
+          <div class="py-5">
+            <div class="col-lg-12">
+              <!--begin::Card-->
+                <div class="card card-border overlay overlay-block">
+                  <div class="overlay-layer card-rounded bg-dark bg-opacity-5">
+                    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+                  </div>
+                </div>
+              <!--end::Card-->
+            </div>
+          </div>
+        <!--end::Loading Content-->
+
+
+      </div>
+      <div v-else>
+
+
+        <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}" style="animation-duration: 0.3s;"></div>
+
+        <!--begin::Content-->
+        <div class="docs-content d-flex flex-column flex-column-fluid" id="kt_docs_content">
+          <!--begin::Container--->
+          <div class="container" id="kt_docs_content_container">
+            <!--begin::Card--->
+            <div class="card card-docs mb-2">
+              <!--begin::Card Body-->
+							<div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
+                <!--begin::Section-->
+                <div class="pb-10">
+
+                  <img src="/assets/images/logo-icdx.png" alt="icdx logo" class="mw-100" style="display: block;margin-left: auto;margin-right: auto;"/>  
+                  <div class="py-5"><h1 class="anchor fw-bolder mb-5" id="overview" style="display: block;text-align: center;">ACCOUNTING & BUDGETING SYSTEM</h1> <br> {{ $t('forgotPassword') }}</div>
+                  <div class="py-5">
+                    <form class="pt-3" @submit.prevent="submitData" method="POST">
+
+                        <div class="form-group position-relative has-icon-left">
+                          <label for="language">Language / Bahasa</label>
+                          <div class="position-relative">
+                            <select v-model="locale" @change="langChanged($i18n.locale)" class="form-select">
+                              <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang"><font  style="color: #212529;">{{ lang }}</font></option>
+                            </select>
+                          </div>
                         </div>
-                        <h4>{{ $t('forgotPassword') }}</h4>
-                        <form class="pt-3" @submit.prevent="submitData" method="POST">
-
-                            <div class="form-group position-relative has-icon-left">
-                                <label for="language">Language / Bahasa</label>
-                                <div class="position-relative">
-                                    <select v-model="locale" @change="langChanged($i18n.locale)" class="form-select">
-                                        <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang"><font  style="color: #212529;">{{ lang }}</font></option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-
-                            <div class="form-group position-relative has-icon-left">
-                                <label for="email">Email</label>
-                                <div class="position-relative">
-                                    <input type="email" class="form-control" v-model="forms.email" aria-describedby="emailHelp" required="" autofocus>
-                                </div>
-
-                                <div v-if="errors.email">
-                                    <div class="alert alert-light-success color-danger" v-for="error in errors.email" :key="error">{{error}}</div>
-                                </div>
-
-                            </div>
+ 
 
 
-                            <div class="form-group position-relative has-icon-left">
-                                    
-                                <div class="position-relative">
-                                    <vue-captcha 
-                                            ref="captcha" 
-                                            :captcha.sync="code"
-                                            @on-change="handleChange">
-                                    </vue-captcha>
+                        <div class="form-group position-relative has-icon-left">
+                          <label for="email">Email</label>
+                          <div class="position-relative">
+                            <input type="email" class="form-control" v-model="forms.email" aria-describedby="emailHelp" required="" autofocus>
+                          </div>
+
+                          <div v-if="errors.email">
+                            <div class="alert alert-light-success color-danger" v-for="error in errors.email" :key="error">{{error}}</div>
+                          </div>
+
+                        </div>
+
+
+ 
+                        <div class="form-group position-relative has-icon-left">
+                          <div class="position-relative">
+                            <vue-captcha 
+                              ref="captcha" 
+                              :captcha.sync="code"
+                              @on-change="handleChange">
+                            </vue-captcha>
                                         
-                                </div>
-                                <div class="buttons">
-                                    <button type="button" @click="refreshCaptchaCode" class="btn icon icon-left btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fa fa-refresh"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Refresh</button>
-                                </div>
-                            </div>
+                          </div>
+                          <div class="buttons">
+                            <button type="button" @click="refreshCaptchaCode" class="btn icon icon-left btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fa fa-refresh"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Refresh</button>
+                          </div>
+                        </div>
 
-                                <div class="form-group position-relative has-icon-left">
-                                    <div class="clearfix">
-                                        <label for="captchaCode">{{ $t('captchaCode') }}</label>
-                                    </div>
-                                    <div class="position-relative">
-                                        <input type="text" class="form-control" v-model="forms.captchaCode" required>
-                                        
-                                    </div>
-                                    <div v-if="errors.captchaCode">
-                                        <div class="alert alert-light-success color-danger" v-for="error in errors.captchaCode" :key="error">{{error}}</div>
-                                    </div>
-                                </div>
 
-                            
-                                <div class="clearfix">
-                                    <button class="btn btn-primary float-right">Submit</button>
-                                </div>
-                                
+                        <div class="form-group position-relative has-icon-left">
+                          <div class="clearfix">
+                            <label for="captchaCode">{{ $t('captchaCode') }}</label>
+                          </div>
+                          <div class="position-relative">
+                            <input type="text" class="form-control" v-model="forms.captchaCode" required>
+                          </div>
+                          <div v-if="errors.captchaCode">
+                            <div class="alert alert-light-success color-danger" v-for="error in errors.captchaCode" :key="error">{{error}}</div>
+                          </div>
+                        </div>
+
+ 
+
+
+
+                        <div class="clearfix">
+                          <button class="btn btn-primary float-right">Submit</button>
+                        </div>
+
 
                         <div class="my-2 d-flex justify-content-between align-items-center">
                             <div class="form-check">
                             
                             </div>
-                            <a href="/" class="auth-link text-black">{{ $t('txtLogin') }}?</a>
+                            <a :href="this.$settings.endPointApp" class="auth-link text-black">{{ $t('txtLogin') }}?</a>
                         </div>
-                        
-                        
-                        </form>
-                    </div>
-                    </div>
+
+                    </form>
+                  </div>
+
                 </div>
-                </div>
+                <!--end::Section-->
+              </div>
+              <!--end::Card-->
             </div>
-            <!-- content-wrapper ends -->
-            </div>
-            <!-- page-body-wrapper ends -->
+            <!--end::Card Body-->
+          </div>
+          <!--end::Container-->
         </div>
+      <!--end::Content-->
+
+
+      </div>
+
+   
+    </div>
+  </div>
+</div>
+
 
 
     </div>
@@ -174,13 +222,11 @@ export default {
                     window.location.href = '/';
                   }else{
                     this.errors = response.data.errors;
-                    this.refreshCaptchaCode();
-                    this.resultError(response.data.errors);
                   }
+                  this.refreshCaptchaCode();
               }).catch(error => {
                 this.loading();
                 if (error.response) {
-                  this.refreshCaptchaCode();
                   if(error.response.status === 422) {
                         this.errors = error.response.data.errors;
                         this.resultError(error.response.data.errors);
@@ -190,6 +236,7 @@ export default {
                     this.$router.push('/page-not-found');
                   }
                 }
+                  this.refreshCaptchaCode();
               });
             }else{
               this.error("email required");
@@ -212,11 +259,11 @@ export default {
           var nameOb      = Object.keys(data)[x];
           var objectData  = data[nameOb];
           for(var y=0; y < objectData.length;y++){ 
-            this.error(objectData[y]);
+            this.error(nameOb+" "+objectData[y]);
           }
       }
     },
-    
+     
     success(kata) {
       const Toast = this.$swal.mixin({
         toast: true,
@@ -271,9 +318,9 @@ export default {
 
     loading(){
         this.fade(true);
-    //   setTimeout(() => {
-    //     this.isLoading = false;
-    //   }, 1000); // hide the message after 3 seconds
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1000); // hide the message after 3 seconds
     },
 
     fetchIt() {
@@ -288,8 +335,8 @@ export default {
     
   },
 	mounted() {
-    this.fetchIt();
-    this.fade(true);
+    // this.fetchIt();
+    // this.fade(true);
     this.loading();
     this.langChanged(this.$i18n.locale);
   }
