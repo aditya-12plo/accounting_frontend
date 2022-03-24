@@ -5,6 +5,11 @@
 
 const messages = {
     "en": {
+        txtMyProfile:"My Profile",
+        txtUserSetting:"User Setting",
+        txtLanguage:"Language",
+        txtSignOut:"Sign Out",
+        txtNotification:"Notification",
         txtLogin:"Login",
         txtLogin2:"Please sign in to continue",
         companyCode:"Company Code",
@@ -40,6 +45,11 @@ const messages = {
         userAccessAdd:"Add New User Access",
     },
     "id": {
+        txtMyProfile:"Profil Pengguna",
+        txtUserSetting:"Pengaturan Pengguna",
+        txtLanguage:"Bahasa",
+        txtSignOut:"Keluar",
+        txtNotification:"Pemberitahuan",
         txtLogin:"Masuk",
         txtLogin2:"Silahkan masuk untuk melanjutkan",
         companyCode:"Kode Perusahaan",
