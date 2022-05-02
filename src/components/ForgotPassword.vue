@@ -1,182 +1,227 @@
 <template>
-    <div>
-
-
-<div class="d-flex flex-column flex-root">
-  <div class="page d-flex flex-row flex-column-fluid">
-    <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-
-
-
-      <div v-if="isLoading">
-
-
-        <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}" style="animation-duration: 0.3s;"></div>
-
-        <!--begin::Loading Content-->
-          <div class="py-5">
-            <div class="col-lg-12">
+  <div>
+    <div v-if="isLoading">
+      <!--begin::Loading Content-->
+      <div class="main-wrapper">
+        <div class="page-wrapper full-page">
+          <div class="container">
+            <div class="row">
               <!--begin::Card-->
-                <div class="card card-border overlay overlay-block">
-                  <div class="overlay-layer card-rounded bg-dark bg-opacity-5">
-                    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+              <div
+                class="text-center mb-3 mt-4 overlay overlay-block"
+                style="background-color: none"
+              >
+                <div class="overlay-layer card-rounded bg-opacity-5">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
                   </div>
                 </div>
-              <!--end::Card-->
-            </div>
-          </div>
-        <!--end::Loading Content-->
-
-
-      </div>
-      <div v-else>
-
-
-        <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}" style="animation-duration: 0.3s;"></div>
-
-        <!--begin::Content-->
-        <div class="docs-content d-flex flex-column flex-column-fluid" id="kt_docs_content">
-          <!--begin::Container--->
-          <div class="container" id="kt_docs_content_container">
-            <!--begin::Card--->
-            <div class="card card-docs mb-2">
-              <!--begin::Card Body-->
-							<div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
-                <!--begin::Section-->
-                <div class="pb-10">
-
-                  <img src="/assets/images/logo-icdx.png" alt="icdx logo" class="mw-100" style="display: block;margin-left: auto;margin-right: auto;"/>  
-                  <div class="py-5"><h1 class="anchor fw-bolder mb-5" id="overview" style="display: block;text-align: center;">ACCOUNTING & BUDGETING SYSTEM</h1> <br> {{ $t('forgotPassword') }}</div>
-                  <div class="py-5">
-                    <form class="pt-3" @submit.prevent="submitData" method="POST">
-
-                        <div class="form-group position-relative has-icon-left">
-                          <label for="language">Language / Bahasa</label>
-                          <div class="position-relative">
-                            <select v-model="locale" @change="langChanged($i18n.locale)" class="form-select">
-                              <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang"><font  style="color: #212529;">{{ lang }}</font></option>
-                            </select>
-                          </div>
-                        </div>
- 
-
-
-                        <div class="form-group position-relative has-icon-left">
-                          <label for="email">Email</label>
-                          <div class="position-relative">
-                            <input type="email" class="form-control" v-model="forms.email" aria-describedby="emailHelp" required="" autofocus>
-                          </div>
-
-                          <div v-if="errors.email">
-                            <div class="alert alert-light-success color-danger" v-for="error in errors.email" :key="error">{{error}}</div>
-                          </div>
-
-                        </div>
-
-
- 
-                        <div class="form-group position-relative has-icon-left">
-                          <div class="position-relative">
-                            <vue-captcha 
-                              ref="captcha" 
-                              :captcha.sync="code"
-                              @on-change="handleChange">
-                            </vue-captcha>
-                                        
-                          </div>
-                          <div class="buttons">
-                            <button type="button" @click="refreshCaptchaCode" class="btn icon icon-left btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fa fa-refresh"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Refresh</button>
-                          </div>
-                        </div>
-
-
-                        <div class="form-group position-relative has-icon-left">
-                          <div class="clearfix">
-                            <label for="captchaCode">{{ $t('captchaCode') }}</label>
-                          </div>
-                          <div class="position-relative">
-                            <input type="text" class="form-control" v-model="forms.captchaCode" required>
-                          </div>
-                          <div v-if="errors.captchaCode">
-                            <div class="alert alert-light-success color-danger" v-for="error in errors.captchaCode" :key="error">{{error}}</div>
-                          </div>
-                        </div>
-
- 
-
-
-
-                        <div class="clearfix">
-                          <button class="btn btn-primary float-right">Submit</button>
-                        </div>
-
-
-                        <div class="my-2 d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                            
-                            </div>
-                            <a :href="this.$settings.endPointApp" class="auth-link text-black">{{ $t('txtLogin') }}?</a>
-                        </div>
-
-                    </form>
-                  </div>
-
-                </div>
-                <!--end::Section-->
               </div>
               <!--end::Card-->
             </div>
-            <!--end::Card Body-->
           </div>
-          <!--end::Container-->
         </div>
-      <!--end::Content-->
-
-
       </div>
+      <!--end::Loading Content-->
+    </div>
+    <div v-else>
+      <div class="main-wrapper">
+        <div class="page-wrapper full-page">
+          <div
+            class="
+              page-content
+              d-flex
+              align-items-center
+              justify-content-center
+            "
+          >
+            <div class="row w-100 mx-0 auth-page">
+              <div class="col-md-4 col-xl-4 mx-auto">
+                <div class="card">
+                  <div class="row">
+                    <div class="col-md-12 ps-md-0">
+                      <div class="auth-form-wrapper px-6 py-5">
+                        <img
+                          src="/assets/images/icdx-group.png"
+                          style="
+                            display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                          "
+                          width="100%"
+                          height="100%"
+                        />
 
-   
+                        <a
+                          href="#"
+                          class="noble-ui-logo d-block mb-2"
+                          style="text-align: center"
+                          ><span> Budgeting System</span></a
+                        >
+                        <h5
+                          class="text-muted fw-normal mb-4"
+                          style="text-align: center"
+                        >
+                          {{ $t("pageForgotPassword") }}
+                        </h5>
+                        <form
+                          class="forms-sample"
+                          @submit.prevent="submitData"
+                          method="POST"
+                        >
+                          <div class="mb-3">
+                            <label for="txtLanguage" class="form-label">{{
+                              $t("txtLanguage")
+                            }}</label>
+                            <select
+                              v-model="locale"
+                              @change="langChanged($i18n.locale)"
+                              class="form-select"
+                            >
+                              <option
+                                v-for="(lang, i) in langs"
+                                :key="`Lang${i}`"
+                                :value="lang"
+                              >
+                                <font style="color: #212529">{{ lang }}</font>
+                              </option>
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label for="emailAddress" class="form-label">{{
+                              $t("emailAddress")
+                            }}</label>
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="email"
+                              :placeholder="$t('emailAddress')"
+                              v-model="forms.email"
+                              autofocus
+                              required
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="company_id" class="form-label">{{
+                              $t("companyCodeTxt")
+                            }}</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="company_id"
+                              :placeholder="$t('companyCodeTxt')"
+                              v-model="forms.company_id"
+                              autofocus
+                              required
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <div class="position-relative">
+                              <vue-captcha
+                                ref="captcha"
+                                :captcha.sync="code"
+                                @on-change="handleChange"
+                              ></vue-captcha>
+                            </div>
+                            <div class="buttons">
+                              <button
+                                type="button"
+                                @click="refreshCaptchaCode"
+                                class="btn icon icon-left btn-info"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="fa fa-refresh"
+                                >
+                                  <circle cx="12" cy="12" r="10"></circle>
+                                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                Refresh
+                              </button>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label for="captchaCode" class="form-label">{{
+                              $t("captchaCode")
+                            }}</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="captchaCode"
+                              :placeholder="$t('captchaCode')"
+                              v-model="forms.captchaCode"
+                              required
+                            />
+                          </div>
+
+                          <div>
+                            <button
+                              class="
+                                btn btn-primary
+                                me-2
+                                mb-2 mb-md-0
+                                text-white
+                              "
+                            >
+                              {{ $t("submitFormTxt") }}
+                            </button>
+                          </div>
+                          <div style="text-align: right">
+                            <a
+                              :href="this.$settings.endPointApp"
+                              class="auth-link text-black"
+                              >{{ $t("rememberPassword") }}?</a
+                            >
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-
-
-    </div>
 </template>
 
 
 <script>
-
-    import Vue from "vue"
-    import { setAuthToken,setAuthLang } from '@/config/auth'
-    import vSelect from 'vue-select'
-    import VueCaptcha from 'vue-captcha-code'
-
+import { setAuthLang } from "@/middleware/auth";
+import VueCaptcha from "vue-captcha-code";
 
 export default {
-  name: 'ForgotPassword',
+  name: "ForgotPassword",
   components: {
-        'v-select':vSelect,
-        VueCaptcha
+    VueCaptcha,
   },
-  data () {
+  data() {
     return {
-        code: '',
-        locale:'',
-        maxToasts: 100,
-        position: 'up right',
-        closeBtn: true,  
-        isLoading: false,  
-        errors: [],
-        langs: ['id', 'en'],
-        forms: {email:'',captchaCode:''},
-    }
+      code: "",
+      locale: "",
+      maxToasts: 100,
+      position: "up right",
+      closeBtn: true,
+      isLoading: false,
+      errors: [],
+      companyModels: [],
+      langs: ["id", "en"],
+      forms: { company_id: "", email: "", captchaCode: "" },
+    };
   },
-   watch: { 
-
-  },
-  methods: { 
+  watch: {},
+  methods: {
     handleChange(code) {
       this.code = code;
     },
@@ -184,165 +229,147 @@ export default {
       this.$refs.captcha.refreshCaptcha();
     },
     makeOffer() {
-        console.log(this.forms)
+      console.log(this.forms);
     },
-
-    resetForms(){
-        this.forms.email        = ''
-        this.forms.captchaCode  = ''
-    },
-
     submitData() {
       this.$swal({
-        title: this.$t('areYouSure'),
-        text: this.$t('yourData'),
+        title: this.$t("areYouSure"),
+        text: this.$t("yourData"),
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!",
       }).then((result) => {
         if (result.value) {
-          
           if (this.forms.captchaCode == this.code) {
             this.fade(true);
 
             if (this.forms.email.trim()) {
               let formData = new FormData();
               formData.append("email", this.forms.email.trim());
-              
-              const baseURI  =  this.$settings.endPoint+"/user/reset-password";
-              
-              this.$http.post(baseURI,formData)
+              formData.append("company_id", this.forms.company_id);
+
+              const baseURI = this.$settings.endPoint + "auth/reset-password";
+
+              this.$http
+                .post(baseURI, formData)
                 .then((response) => {
                   this.loading();
-                  if(response.data.status === 200) {
+                  if (response.data.status === 200) {
                     this.errors = [];
-                    this.resetForms()
                     this.success(response.data.datas.messages);
-                    window.location.href = '/';
-                  }else{
+                    window.location.href = "/";
+                  } else {
+                    this.forms.captchaCode = "";
                     this.errors = response.data.errors;
+                    this.resultError(response.data.errors);
+                    this.refreshCaptchaCode();
                   }
-                  this.refreshCaptchaCode();
-              }).catch(error => {
-                this.loading();
-                if (error.response) {
-                  if(error.response.status === 422) {
-                        this.errors = error.response.data.errors;
-                        this.resultError(error.response.data.errors);
-                  }else if (error.response.status === 500) {
-                    this.$router.push('/server-error');
-                  }else{
-                    this.$router.push('/page-not-found');
+                })
+                .catch((error) => {
+                  this.loading();
+                  if (error.response) {
+                    if (error.response.status === 422) {
+                      this.errors = error.response.data.errors;
+                      this.resultError(error.response.data.errors);
+                    } else if (error.response.status === 500) {
+                      this.$router.push("/server-error");
+                    } else {
+                      this.$router.push("/page-not-found");
+                    }
                   }
-                }
+                  this.forms.captchaCode = "";
                   this.refreshCaptchaCode();
-              });
-            }else{
+                });
+            } else {
               this.error("email required");
             }
-          }else{
+          } else {
             this.refreshCaptchaCode();
-            var wrongCaptchaCode = this.$t('wrongCaptchaCode');
+            this.forms.captchaCode = "";
+            var wrongCaptchaCode = this.$t("wrongCaptchaCode");
             this.error(wrongCaptchaCode);
           }
-
-
-          
         }
-      })            
+      });
     },
 
-    resultError(data) {  
+    resultError(data) {
       var count = Object.keys(data).length;
-        for(var x=0; x < count;x++){ 
-          var nameOb      = Object.keys(data)[x];
-          var objectData  = data[nameOb];
-          for(var y=0; y < objectData.length;y++){ 
-            this.error(nameOb+" "+objectData[y]);
-          }
+      for (var x = 0; x < count; x++) {
+        var nameOb = Object.keys(data)[x];
+        var objectData = data[nameOb];
+        for (var y = 0; y < objectData.length; y++) {
+          this.error(objectData[y]);
+        }
       }
     },
-     
+
     success(kata) {
       const Toast = this.$swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: "top-end",
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', this.$swal.stopTimer)
-          toast.addEventListener('mouseleave', this.$swal.resumeTimer)
-        }
-      })
-          Toast.fire({
-        icon: 'success',
-        title: kata
-      })
-    },
-    
-    error(kata) {      
-      const Toast = this.$swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', this.$swal.stopTimer)
-          toast.addEventListener('mouseleave', this.$swal.resumeTimer)
-        }
-      })
-          Toast.fire({
-        icon: 'error',
-        title: kata
-      })
-   
+          toast.addEventListener("mouseenter", this.$swal.stopTimer);
+          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: kata,
+      });
     },
 
-    langChanged(lang){
-      if(this.locale == ''){
+    error(kata) {
+      const Toast = this.$swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", this.$swal.stopTimer);
+          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: kata,
+      });
+    },
+
+    langChanged(lang) {
+      if (this.locale == "") {
         this.locale = lang;
         setAuthLang(lang);
-      }else{
+      } else {
         this.$i18n.locale = this.locale;
         localStorage.Lang = this.locale;
         setAuthLang(this.locale);
       }
     },
- 
-    fade(sType){  	
+
+    fade(sType) {
       this.isLoading = sType;
     },
 
-    loading(){
-        this.fade(true);
+    loading() {
+      this.fade(true);
       setTimeout(() => {
-        this.isLoading = false;
+        this.fade(false);
       }, 1000); // hide the message after 3 seconds
     },
-
-    fetchIt() {
- 
-    },
-
   },
-  events: {
-
-  },
-  created: function() { 
-    
-  },
-	mounted() {
-    // this.fetchIt();
-    // this.fade(true);
+  events: {},
+  created: function () {},
+  mounted() {
     this.loading();
     this.langChanged(this.$i18n.locale);
-  }
-
-}
+  },
+};
 </script>
 <style scoped>
-
 </style>

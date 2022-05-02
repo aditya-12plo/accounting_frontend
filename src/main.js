@@ -1,4 +1,5 @@
-import Vue from "vue";
+import Vue from 'vue'
+import App from './App.vue'
 import VueSweetalert2 from 'vue-sweetalert2';
 import Axios from 'axios';
 import vueJquery from 'vue-jquery';
@@ -9,15 +10,15 @@ import VueGoodTablePlugin from 'vue-good-table';
 import moment from 'moment';
 import money from 'v-money';
 import VModal from 'vue-js-modal';
-import App from "./App.vue";
-import router from "./router";
+import router from "./routes";
 import store from "./store";
-import messages from "@/plugins/i18n";
+import messages from "@/middleware/i18n";
 import VueI18n from "vue-i18n";
-import {onRandom,onBehind} from "@/plugins/hadish";
-import settings from '@/config/app';
-import addFunction from '@/config/addFunction';
-import {getAuthToken,getUserInfo,logoutUser,setAuthToken,setAuthLang} from '@/config/auth';
+import {onRandom,onBehind} from "@/middleware/hadish";
+import settings from '@/middleware/app';
+import addFunction from '@/middleware/addFunction';
+import {getAuthToken,getUserInfo,logoutUser,setAuthToken,setAuthLang} from '@/middleware/auth';
+
 
 moment.locale('id');
 
@@ -79,14 +80,8 @@ new Vue({
   render: h => h(App)
 }).$mount("#app");
 
+// Vue.config.productionTip = false
 
-/*
-import Vue from 'vue'
-import App from './App.vue'
-
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
-*/
+// new Vue({
+//   render: h => h(App),
+// }).$mount('#app')

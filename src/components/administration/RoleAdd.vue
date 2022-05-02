@@ -1,0 +1,314 @@
+<template>
+  <div>
+    <div class="main-wrapper">
+      <!--begin::sidebar-->
+      <sidebar-component classMenu="Role"></sidebar-component>
+      <!--end::sidebar-->
+
+      <div class="page-wrapper">
+        <!--begin::navbar-->
+        <navbar-component></navbar-component>
+        <!--end::navbar-->
+
+        <!--begin::content-->
+        <div class="page-content">
+          <div
+            class="
+              d-flex
+              justify-content-between
+              align-items-center
+              flex-wrap
+              grid-margin
+            "
+          >
+            <div class="col-lg-12 col-xl-12 col-sm-12 col-xs-12 col-md-12">
+              <div class="card">
+                <div class="card-header">
+                      <!-- <i class="link-icon float-start" data-feather="arrow-left"></i> -->
+                       &nbsp;&nbsp;&nbsp;
+                      <h6 class="card-title mb-0 float-start">{{ $t("roleAdd") }}</h6>
+                      <button
+                        class="btn btn-default btn-sm float-end"
+                        @click="resetForm"
+                        type="button"
+                      >
+                      <i class="link-icon" data-feather="repeat"></i>
+                        {{ $t("resetFormTxt") }}
+                      </button>
+                </div>
+                <div class="card-body">
+                  <!--begin::loading-data-->
+                  <div v-if="isLoading" class="d-flex align-items-center">
+                    <div
+                      class="spinner-border ms-auto"
+                      role="status"
+                      aria-hidden="true"
+                    ></div>
+                    <strong>{{ $t("loadingTxt") }}...</strong>
+                  </div>
+                  <!--end::loading-data-->
+
+                  <form
+                    class="forms-sample"
+                    @submit.prevent="submitData"
+                    method="POST"
+                  >
+                    <div
+                      class="
+                        d-flex
+                        justify-content-between
+                        align-items-baseline
+                        mb-2
+                      "
+                    >
+                    
+                    </div>
+                    
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t('roleNameTxt')
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          :placeholder="$t('roleNameTxt')"
+                          v-model="forms.name"
+                          required
+                        />
+                        <div v-if="errors.name">
+                          <div
+                            v-for="error in errors.name"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t('descriptionTxt')
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="description"
+                          :placeholder="$t('descriptionTxt')"
+                          v-model="forms.description"
+                        />
+                        <div v-if="errors.description">
+                          <div
+                            v-for="error in errors.description"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+
+                   
+                    <div class="card-footer">
+                      <button
+                        class="btn btn-warning float-start btn-sm"
+                        @click="backForm"
+                        type="button"
+                      >
+                      <i class="link-icon float-start" data-feather="arrow-left"></i>
+                        {{ $t("backMess") }}
+                      </button>
+                      &nbsp;&nbsp;&nbsp;
+                      <button class="btn btn-primary float-end btn-sm" type="submit">
+                           <i class="link-icon" data-feather="save"></i>
+                        {{ $t("submitFormTxt") }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div> <!--end::card-->
+            </div>
+          </div>
+        </div>
+        <!--end::content-->
+
+        <!--begin::footer-->
+        <footer-component></footer-component>
+        <!--end::footer-->
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<script>
+import sidebarComponent from "@/components/_partials/_sidebar";
+import navbarComponent from "@/components/_partials/_navbar";
+import footerComponent from "@/components/_partials/_footer";
+
+export default {
+  name: "RoleAdd",
+  props: {},
+  components: {
+    "sidebar-component": sidebarComponent,
+    "navbar-component": navbarComponent,
+    "footer-component": footerComponent,
+  },
+  data() {
+    return {
+      isLoading: false,
+      maxToasts: 100,
+      position: "up right",
+      closeBtn: true,
+      errors: [],
+      userData: "",
+      companyCode: "",
+      forms: { name: "", usernmae: "" },
+    };
+  },
+  watch: {},
+  methods: {
+    resetForm() {
+      this.forms.name = "";
+      this.forms.description = "";
+    },
+
+
+    backForm() {
+       window.location.href = "/role";
+    },
+
+
+    submitData() {
+      this.$swal({
+        title: this.$t("areYouSure"),
+        text: this.$t("yourData"),
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!",
+      }).then((result) => {
+        if (result.value) {
+          this.fade(true);
+
+          let formData = new FormData();
+          formData.append("name", this.forms.name);
+          formData.append("description", this.forms.description);
+       
+          const baseURI  =  this.$settings.endPoint+"role/create";
+          this.$http.post(baseURI,formData).then((response) => {
+              this.loading();
+              if(response.data.status === 200) {
+              this.resetForm();
+                  this.errors = [];
+                  //console.log(response.data.datas.user_id);
+                  var params = this.$onRandom(response.data.datas.role_id);
+                  window.location.href = "/role/detail/" + params;
+                  // this.success('Berhasil');
+              }else{
+                  this.errors = response.data.errors;
+                  this.resultError(response.data.errors);
+              }
+          }).catch(error => {
+              this.loading();
+              if (error.response) {
+              if(error.response.status === 422) {
+                      this.errors = error.response.data.errors;
+                      this.resultError(error.response.data.errors);
+              }else if (error.response.status === 500) {
+                  this.$router.push('/server-error');
+              }else{
+                  this.$router.push('/page-not-found');
+              }
+              }
+              this.resetForm();
+          });
+        }
+      });
+    },
+
+    fade(sType) {
+      this.isLoading = sType;
+    },
+
+    loading() {
+      this.fade(true);
+      setTimeout(() => {
+        this.fade(false);
+      }, 1000); // hide the message after 3 seconds
+    },
+
+    resultError(data) {
+      var count = Object.keys(data).length;
+      for (var x = 0; x < count; x++) {
+        var nameOb = Object.keys(data)[x];
+        var objectData = data[nameOb];
+        for (var y = 0; y < objectData.length; y++) {
+          this.error(objectData[y]);
+        }
+      }
+    },
+
+    success(kata) {
+      const Toast = this.$swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", this.$swal.stopTimer);
+          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: kata,
+      });
+    },
+
+    error(kata) {
+      const Toast = this.$swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", this.$swal.stopTimer);
+          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: kata,
+      });
+    },
+  },
+  events: {},
+  created: function () {},
+  mounted() {
+
+  },
+};
+</script>
+<style scoped>
+</style>
