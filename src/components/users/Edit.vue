@@ -23,14 +23,19 @@
           >
             <div class="col-lg-12 col-xl-12 col-sm-12 col-xs-12 col-md-12">
               <div class="card">
-                
-                 <div class="card-header">
+                <div class="card-header">
                       <!-- <i class="link-icon float-start" data-feather="arrow-left"></i> -->
                        &nbsp;&nbsp;&nbsp;
                       <h6 class="card-title mb-0 float-start">Detail</h6>
-                      
+                      <button
+                        class="btn btn-default btn-sm float-end"
+                        @click="resetForm"
+                        type="button"
+                      >
+                      <i class="link-icon" data-feather="repeat"></i>
+                        {{ $t("resetFormTxt") }}
+                      </button>
                 </div>
-
                 <div class="card-body">
                   <!--begin::loading-data-->
                   <div v-if="isLoading" class="d-flex align-items-center">
@@ -60,7 +65,7 @@
                     </div>
                     
                      <div class="row mb-3">
-                      <div class="col-lg-2">
+                      <div class="col-lg-3">
                         <label for="defaultconfig" class="col-form-label">{{
                           $t("nameTxt")
                         }}</label>
@@ -72,7 +77,7 @@
                           id="nameTxt"
                           :placeholder="$t('nameTxt')"
                           v-model="forms.name"
-                          readonly
+                          
                         />
                         <div v-if="errors.name">
                           <div
@@ -87,44 +92,11 @@
                         </div>
                       </div>
                     </div>
-
-                    <div class="row mb-3">
-                      <div class="col-lg-2">
-                        <label for="defaultconfig" class="col-form-label">{{
-                          $t("usernameTxt")
-                        }}</label>
-                      </div>
-                      <div class="col-lg-8">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="usernameTxt"
-                          :placeholder="$t('usernameTxt')"
-                          v-model="forms.username"
-                          readonly
-                        />
-                        <div v-if="errors.username">
-                          <div
-                            v-for="error in errors.username"
-                            :key="error"
-                            class="alert alert-primary"
-                            role="alert"
-                          >
-                            <i data-feather="alert-circle"></i>
-                            {{ error }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                   
-
-
+ 
 
 
                      <div class="row mb-3">
-                      <div class="col-lg-2">
+                      <div class="col-lg-3">
                         <label for="defaultconfig" class="col-form-label">{{
                           $t("emailAddress")
                         }}</label>
@@ -136,7 +108,7 @@
                           id="emailAddress"
                           :placeholder="$t('emailAddress')"
                           v-model="forms.email"
-                          readonly
+                          
                         />
                         <div v-if="errors.email">
                           <div
@@ -152,22 +124,75 @@
                       </div>
                     </div>
 
+ 
+
+                     <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t("password")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="password"
+                          :placeholder="$t('password')"
+                          v-model="forms.password"
+                        />
+                        <div v-if="errors.password">
+                          <div
+                            v-for="error in errors.password "
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
 
                     <div class="row mb-3">
-                      <div class="col-lg-2">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t("DivisionTxt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                         <v-select v-model="forms.division_id" :options="this.fetchDivision" label="division_id" :placeholder="$t('DivisionTxt')" />
+ 
+
+                        <div v-if="errors.division_id">
+                          <div
+                            v-for="error in errors.division_id"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
                         <label for="defaultconfig" class="col-form-label">{{
                           $t("companyCode")
                         }}</label>
                       </div>
                       <div class="col-lg-8">
-                        
-                         <select class="form-control" name="company_id" id="company_id" v-model="forms.company_id" disabled>
-                          <option  v-for="(a, index) of fetchCompany" :value="a.company_id" :key="index">{{a.code}} | {{a.name}}</option>
-                        </select>
+                         <v-select multiple v-model="forms.companys" :options="this.fetchCompany" label="company_id" :placeholder="$t('companyCode')" />
                        
-                        <div v-if="errors.company_id">
+                        <div v-if="errors.company_ids">
                           <div
-                            v-for="error in errors.company_id"
+                            v-for="error in errors.company_ids"
                             :key="error"
                             class="alert alert-primary"
                             role="alert"
@@ -180,43 +205,65 @@
                     </div>
 
 
-                    <div class="row mb-3">
-                      <div class="col-lg-2">
-                        <label for="defaultconfig" class="col-form-label">{{
-                          $t("roleTxt")
-                        }}</label>
-                      </div>
-                      <div class="col-lg-8">
-
-                        <select class="form-control" name="role_id" id="role_id" v-model="forms.role_id" disabled>
-                            <option  v-for="(a, index) of fetchRole" :value="a.role_id" :key="index">{{a.name}}</option>
-                        </select>
-
-                        <div v-if="errors.roleId">
-                          <div
-                            v-for="error in errors.roleId"
-                            :key="error"
-                            class="alert alert-primary"
-                            role="alert"
-                          >
-                            <i data-feather="alert-circle"></i>
-                            {{ error }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
 
                     
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t("levelTxt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                         <v-select v-model="forms.level" :options="this.levels" :placeholder="$t('levelTxt')" />
+ 
+
+                        <div v-if="errors.level">
+                          <div
+                            v-for="error in errors.level"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
 
 
+                    
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">
+                          Status
+                        </label>
+                      </div>
+                      <div class="col-lg-8">
+                         <v-select v-model="forms.status" :options="this.statuses" placeholder="Status" />
+ 
+
+                        <div v-if="errors.status">
+                          <div
+                            v-for="error in errors.status"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
 
 
 
                    
-                    <div class="buttons">
+                    <div class="card-footer">
                       <button
                         class="btn btn-warning float-start btn-sm"
                         @click="backForm"
@@ -226,14 +273,15 @@
                         {{ $t("backMess") }}
                       </button>
                       &nbsp;&nbsp;&nbsp;
-                      <!-- <button class="btn btn-primary float-end btn-sm" type="submit">
+                      <button class="btn btn-primary float-end btn-sm" type="submit">
                            <i class="link-icon" data-feather="save"></i>
                         {{ $t("submitFormTxt") }}
-                      </button> -->
+                      </button>
+                      
                     </div>
                   </form>
                 </div>
-              </div>
+              </div> <!--end::card-->
             </div>
           </div>
         </div>
@@ -249,17 +297,20 @@
 
 
 <script>
+import { setAuthToken } from "@/middleware/auth";
 import sidebarComponent from "@/components/_partials/_sidebar";
 import navbarComponent from "@/components/_partials/_navbar";
 import footerComponent from "@/components/_partials/_footer";
+import vSelect from 'vue-select'
 
 export default {
-  name: "UsersDetail",
+  name: "UsersEdit",
   props: {},
   components: {
     "sidebar-component": sidebarComponent,
     "navbar-component": navbarComponent,
     "footer-component": footerComponent,
+    "v-select": vSelect,
   },
   data() {
     return {
@@ -270,57 +321,46 @@ export default {
       errors: [],
       userData: "",
       companyCode: "",
-      fetchRole:[],
+      levels:["ROOT","STAFF"],
+      statuses:["active","deactived"],
+      fetchDivision:[],
       fetchCompany:[],
       permision_role:[],
-      forms: [],
+      forms: { name: "", email: "", division_id:"",companys:"",password:"",level:"",status:"" },
     };
   },
   watch: {},
   methods: {
     resetForm() {
+      this.forms.level = "";
       this.forms.name = "";
-      this.forms.username = "";
       this.forms.password = "";
       this.forms.email = "";
-      this.forms.company_id = "";
-      this.forms.role_id = "";
-
+      this.forms.companys = "";
+      this.forms.status = "";
+      this.forms.division_id = "";
     },
+
 
     backForm() {
        window.location.href = "/users";
     },
 
-
-    loadData(id) {
-      const baseURI = this.$settings.endPoint + "user/detail/"+id;
-      return this.$http
-        .get(
-          baseURI
-        )
-        .then((response) => {
-            this.forms=response.data.datas;
-            
-            // this.form={ name: 'asep', usernmae:res.username };
-        });
-    },
-
-    loadRole() {
-      const baseURI = this.$settings.endPoint + "/role";
+    loadDivision() {
+      const baseURI = this.$settings.endPoint + "division/all";
      
       return this.$http
         .get(
           baseURI
         )
         .then((response) => {
-            this.fetchRole=response.data.datas.data;
+            this.fetchDivision=response.data.datas.data;
         });
     },
 
 
     loadCompany() {
-      const baseURI = this.$settings.endPoint + "/company";
+      const baseURI = this.$settings.endPoint + "company/all";
      
       return this.$http
         .get(
@@ -341,29 +381,36 @@ export default {
         confirmButtonText: "Yes!",
       }).then((result) => {
         if (result.value) {
-          this.fade(true);
-          // let params = this.$onBehind(this.$route.params.id);
-          // let formData = new FormData();
-          // formData.append("name", this.forms.name);
-          // formData.append("username", this.forms.username);
-          // formData.append("password", this.forms.password);
-          // formData.append("email", this.forms.email);
-          // formData.append("company_id", this.forms.company_id);
-          // formData.append("role_id", this.forms.role_id);
-          // formData.append("status", 'active');
+            this.fade(true);
 
-          const baseURI  =  this.$settings.endPoint+"user/update/"+this.forms.user_id;
-          this.$http.patch(baseURI,this.forms).then((response) => {
-              this.loading();
+            let company_ids = [];
+            this.forms.companys.forEach((value ) => {
+                    company_ids.push(value.company_id);
+                });
+
+            let division_id = this.forms.division_id.division_id
+            if(!division_id){
+              division_id = this.forms.division_id
+            }
+            let formData = {
+                "name"          : this.forms.name,
+                "division_id"   : division_id,
+                "password"      : this.forms.password,
+                "email"         : this.forms.email.trim(),
+                "company_ids"   : company_ids,
+                "level"         : this.forms.level,
+                "status"        : this.forms.status,
+            };
+ 
+
+            var id = this.$onBehind(this.$route.params.id);
+            const baseURI  =  this.$settings.endPoint+"user/update/"+id;
+          this.$http.put(baseURI,formData).then((response) => {
+                this.loading();
+                this.loadData();
               if(response.data.status === 200) {
-              this.resetForm();
-                  this.errors = [];
-                  this.success(response.data.datas.messages);
-
-                  //window.history.back();
-                  var params = this.$onRandom(this.forms.user_id);
-                  window.location.href = "/users/detail/" + params;
-
+                    this.errors = [];
+                    this.success(response.data.datas.messages);
               }else{
                   this.errors = response.data.errors;
                   this.resultError(response.data.errors);
@@ -372,8 +419,9 @@ export default {
               this.loading();
               if (error.response) {
               if(error.response.status === 422) {
-                      this.errors = error.response.data.errors;
-                      this.resultError(error.response.data.errors);
+                    this.loadData();
+                    this.errors = error.response.data.errors;
+                    this.resultError(error.response.data.errors);
               }else if (error.response.status === 500) {
                   this.$router.push('/server-error');
               }else{
@@ -382,6 +430,7 @@ export default {
               }
               this.resetForm();
           });
+          
         }
       });
     },
@@ -419,17 +468,11 @@ export default {
           toast.addEventListener("mouseenter", this.$swal.stopTimer);
           toast.addEventListener("mouseleave", this.$swal.resumeTimer);
         },
-        // onShown: function() {
-        //     console.log('asdasdasd');
-        //     //window.location.href = '/';
-        // }
       });
-
       Toast.fire({
         icon: "success",
         title: kata,
       });
-
     },
 
     error(kata) {
@@ -452,31 +495,42 @@ export default {
     fetchIt() {
       const userDatas     = this.$getUserInfo();
       this.detailUser     = userDatas.sub;
-      // this.permision_role = userDatas.sub.permision_role;
-      let rolePermision = [];
-      userDatas.sub.permision_role.forEach(function(permision){
-        if(permision.permission.controller == 'UserController'){
-          rolePermision = permision;
-          // console.log(permision);
-        }
-      });
+      
 
-      if(!rolePermision.method_read){
+      if(this.detailUser.level != "ROOT"){
         this.$router.push("/authorized-error");
       }
-      this.permision_role = rolePermision;
 
+    },
+
+
+    loadData() {
+      var id = this.$onBehind(this.$route.params.id);
+      const baseURI = this.$settings.endPoint + "user/detail/"+id;
+      return this.$http
+        .get(
+          baseURI
+        )
+        .then((response) => {
+            if(response.data.datas.credentials){
+                setAuthToken(response.data.datas.credentials.access_token);
+            }
+            this.forms.name         = response.data.datas.data.name;
+            this.forms.email        = response.data.datas.data.email;
+            this.forms.companys     = response.data.datas.data.user_company;
+            this.forms.status       = response.data.datas.data.status;
+            this.forms.division_id  = response.data.datas.data.division_id;
+            this.forms.level        = response.data.datas.data.level;
+        });
     },
   },
   events: {},
   created: function () {},
   mounted() {
-
-      var params = this.$onBehind(this.$route.params.id);
-      this.fetchIt();
-       this.loadData(params[0]);
-       this.loadRole();
-       this.loadCompany();
+    this.fetchIt();
+    this.loadData();
+    this.loadDivision();
+    this.loadCompany();
   },
 };
 </script>

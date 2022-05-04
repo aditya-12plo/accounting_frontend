@@ -11,35 +11,18 @@ import AuthorizedErrorPage from "@/components/UserPageAuthorized.vue";
 import UserDashboard from "@/components/UserDashboard.vue";
 import UserProfile from "@/components/users/Profile.vue";
 import ChangePassword from "@/components/users/ChangePassword.vue";
-import ContactUs from "@/components/support/ContactUs.vue";
 
-import Users from "@/components/administration/Users.vue";
-import UsersAdd from "@/components/administration/UsersAdd.vue";
-import UsersEdit from "@/components/administration/UsersEdit.vue";
-import UsersDetail from "@/components/administration/UsersDetail.vue";
+import Users from "@/components/users/Index.vue";
+import UsersAdd from "@/components/users/Add.vue";
+import UsersEdit from "@/components/users/Edit.vue";
+import UsersDetail from "@/components/users/Detail.vue";
 
-import Company from "@/components/administration/Company.vue";
-import CompanyAdd from "@/components/administration/CompanyAdd.vue";
-import CompanyDetail from "@/components/administration/CompanyDetail.vue";
-import CompanyEdit from "@/components/administration/CompanyEdit.vue";
-import CompanyUpload from "@/components/administration/CompanyUpload.vue";
+// import Company from "@/components/administration/Company.vue";
+// import CompanyAdd from "@/components/administration/CompanyAdd.vue";
+// import CompanyDetail from "@/components/administration/CompanyDetail.vue";
+// import CompanyEdit from "@/components/administration/CompanyEdit.vue";
+// import CompanyUpload from "@/components/administration/CompanyUpload.vue";
 
-import Role from "@/components/administration/Role.vue";
-import RoleAdd from "@/components/administration/RoleAdd.vue";
-import RoleDetail from "@/components/administration/RoleDetail.vue";
-import RoleEdit from "@/components/administration/RoleEdit.vue";
-import RoleUpload from "@/components/administration/RoleUpload.vue";
-
-
-import Permission from "@/components/administration/Permission.vue";
-import PermissionAdd from "@/components/administration/PermissionAdd.vue";
-import PermissionDetail from "@/components/administration/PermissionDetail.vue";
-import PermissionEdit from "@/components/administration/PermissionEdit.vue";
-import PermissionUpload from "@/components/administration/PermissionUpload.vue";
-
-
-
-import PermissionRole from "@/components/administration/PermissionRole.vue";
 
 
 Vue.use(VueRouter);
@@ -136,20 +119,7 @@ const routes = [
     name: "ChangePassword",
     component: ChangePassword
   }, 
-  
-
-  /**
-   * Support
-   */
-  {
-    path:'/contact-us', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "ContactUs",
-    component: ContactUs
-  }, 
-
+ 
 
   /**
    * Administration/Users
@@ -159,7 +129,7 @@ const routes = [
     meta: {
       title: "Accounting & Budgeting System",
     },
-    name: "Users",
+    name: "UsersIndex",
     component:Users
   }, 
   {
@@ -190,209 +160,7 @@ const routes = [
     component:UsersDetail
   }, 
 
-
-  /**
-   * Administration/Company
-   */
-   {
-    path:'/company', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "Company",
-    component:Company
-  }, 
-  {
-    path:'/company/add', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "CompanyAdd",
-    component:CompanyAdd
-  }, 
-
-  {
-    path:'/company/edit/:id', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "CompanyEdit",
-    component:CompanyEdit
-  }, 
-
-  {
-    path:'/company/detail/:id', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "CompanyDetail",
-    component:CompanyDetail
-  }, 
-
-
-  {
-    path:'/company/upload', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "CompanyUpload",
-    component:CompanyUpload
-  }, 
-
-  /**
-   * Administration/Role
-   */
-  {
-    path:'/role', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "Role",
-    component:Role
-  }, 
-
-
-  {
-    path:'/role/add', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "RoleAdd",
-    component:RoleAdd
-  }, 
   
-  {
-    path:'/role/edit/:id', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "RoleEdit",
-    component:RoleEdit
-  }, 
-
-  {
-    path:'/role/detail/:id', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "RoleDetail",
-    component:RoleDetail
-  }, 
-
-
-  {
-    path:'/role/upload', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "RoleUpload",
-    component:RoleUpload
-  }, 
-
-
-
-
-
-  /**
-   * Administration/Permission
-   */
-   {
-    path:'/permission', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "Permission",
-    component:Permission
-  }, 
-
-  {
-    path:'/permission/add', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "PermissionAdd",
-    component:PermissionAdd
-  }, 
-  
-  {
-    path:'/permission/edit/:id', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "PermissionEdit",
-    component:PermissionEdit
-  }, 
-
-  {
-    path:'/permission/detail/:id', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "PermissionDetail",
-    component:PermissionDetail
-  }, 
-
-
-  {
-    path:'/permission/upload', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "PermissionUpload",
-    component:PermissionUpload
-  }, 
-
-
-
-
-  /**
-   * Administration/Permission
-   */
-   {
-    path:'/permission-role', 
-    meta: {
-      title: "Accounting & Budgeting System",
-    },
-    name: "Permission Role",
-    component:PermissionRole
-  }, 
-
-  // {
-  //   path:'/permission/add', 
-  //   meta: {
-  //     title: "Accounting & Budgeting System",
-  //   },
-  //   name: "PermissionAdd",
-  //   component:PermissionAdd
-  // }, 
-  
-  // {
-  //   path:'/permission/edit/:id', 
-  //   meta: {
-  //     title: "Accounting & Budgeting System",
-  //   },
-  //   name: "PermissionEdit",
-  //   component:PermissionEdit
-  // }, 
-
-  // {
-  //   path:'/permission/detail/:id', 
-  //   meta: {
-  //     title: "Accounting & Budgeting System",
-  //   },
-  //   name: "PermissionDetail",
-  //   component:PermissionDetail
-  // }, 
-
-
-  // {
-  //   path:'/permission/upload', 
-  //   meta: {
-  //     title: "Accounting & Budgeting System",
-  //   },
-  //   name: "PermissionUpload",
-  //   component:PermissionUpload
-  // }, 
 
 ];
 

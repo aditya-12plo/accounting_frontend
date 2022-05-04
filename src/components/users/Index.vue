@@ -2,7 +2,7 @@
   <div>
     <div class="main-wrapper">
       <!--begin::sidebar-->
-      <sidebar-component classMenu="CompanyIndex"></sidebar-component>
+      <sidebar-component classMenu="UsersIndex"></sidebar-component>
       <!--end::sidebar-->
 
       <div class="page-wrapper">
@@ -28,7 +28,8 @@
             <div class="col-lg-12 col-xl-12 stretch-card">
               <div class="card">
                 <div class="card-header">
-                  <h4 style="margin-right: 5px" class="float-start">{{ $t("companyTxt") }}</h4>
+                  <h4 style="margin-right: 5px" class="float-start">{{ $t("txtUsers") }}</h4>
+                 
                   <button
                     class="btn btn-primary float-end btn-xs"
                     style="margin-right: 5px"
@@ -36,14 +37,6 @@
                   >
                     <i class="link-icon" data-feather="plus"></i>
                     {{ $t("createNew") }}
-                  </button>
-                  <button
-                    class="btn btn-warning float-end btn-xs"
-                    style="margin-right: 5px"
-                    @click.prevent="uploadData()"
-                  >
-                     <i class="link-icon" data-feather="upload"></i>
-                    {{ $t("uploadData") }} .xlsx
                   </button>
                   <button
                     class="btn btn-success float-end btn-xs"
@@ -74,7 +67,6 @@
                    
                   >
                     <template slot="table-row" slot-scope="props">
-                      
                       <span v-if="props.column.field == 'actions'">
                           
                         <button
@@ -87,38 +79,31 @@
                         </button>
                         <button
                           class="btn btn-warning btn-xs"
-                         style="margin-right: 5px ; margin-bottom: 5px"
+                          style="margin-right: 5px ; margin-bottom: 5px"
                           @click.prevent="editData(props.index, props.row)"
                         >
                           
                           Edit
                         </button>
-                        <!-- <button
+                        <button
                           v-if="props.row.status === 'deactived'"
-                          class="btn btn-success"
+                          class="btn btn-success btn-xs"
+                         style="margin-right: 5px ; margin-bottom: 5px"
                           @click.prevent="
-                            updateStatus(props.index, props.row, 'active')
+                            deleteData(props.index, props.row, 'active')
                           "
                         >
                           Activate
                         </button>
                         <button
                           v-if="props.row.status === 'active'"
-                          class="btn btn-danger"
+                          class="btn btn-danger btn-xs"
+                         style="margin-right: 5px ; margin-bottom: 5px"
                           @click.prevent="
-                            updateStatus(props.index, props.row, 'deactived')
+                            deleteData(props.index, props.row, 'deactived')
                           "
                         >
                           Deactivated
-                        </button> -->
-
-                        <button
-                          class="btn btn-danger btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="deleteData(props.index, props.row)"
-                        >
-                         
-                          Delete
                         </button>
                       </span>
                       <span v-else>
@@ -142,12 +127,13 @@
 </template>
 
 <script>
+import { setAuthToken } from "@/middleware/auth";
 import sidebarComponent from "../_partials/_sidebar";
 import navbarComponent from "../_partials/_navbar";
 import footerComponent from "../_partials/_footer";
 
 export default {
-  name: "CompanyIndex",
+  name: "UsersIndex",
   components: {
     "sidebar-component": sidebarComponent,
     "navbar-component": navbarComponent,
@@ -175,17 +161,6 @@ export default {
       },
       columns: [
         {
-          label: "Code",
-          field: "code",
-          filterOptions: {
-            enabled: true, // enable filter for this column
-            placeholder: "Filter By Code", // placeholder for filter input
-            filterValue: "", // initial populated value for this filter
-            filterDropdownItems: [], // dropdown (with selected values) instead of text input
-            trigger: "enter", //only trigger on enter not on keyup
-          },
-        },
-        {
           label: "Name",
           field: "name",
           filterOptions: {
@@ -197,34 +172,22 @@ export default {
           },
         },
         {
-          label: "Country",
-          field: "country",
+          label: "Email",
+          field: "email",
           filterOptions: {
             enabled: true, // enable filter for this column
-            placeholder: "Filter By Country", // placeholder for filter input
-            filterValue: "", // initial populated value for this filter
-            filterDropdownItems: [], // dropdown (with selected values) instead of text input
-            trigger: "enter", //only trigger on enter not on keyup
-          },
-        },
-
-        {
-          label: "Province",
-          field: "province",
-          filterOptions: {
-            enabled: true, // enable filter for this column
-            placeholder: "Filter By Province", // placeholder for filter input
+            placeholder: "Filter By Email", // placeholder for filter input
             filterValue: "", // initial populated value for this filter
             filterDropdownItems: [], // dropdown (with selected values) instead of text input
             trigger: "enter", //only trigger on enter not on keyup
           },
         },
         {
-          label: "City",
-          field: "city",
+          label: "Division",
+          field: "division_id",
           filterOptions: {
             enabled: true, // enable filter for this column
-            placeholder: "Filter By City", // placeholder for filter input
+            placeholder: "Filter By Division", // placeholder for filter input
             filterValue: "", // initial populated value for this filter
             filterDropdownItems: [], // dropdown (with selected values) instead of text input
             trigger: "enter", //only trigger on enter not on keyup
@@ -254,23 +217,19 @@ export default {
   methods: {
 
     downloadData() {
-      const baseURI = this.$settings.endPoint + "/company";
+      const baseURI = this.$settings.endPoint + "user/index";
       var CurrentDate = this.$moment().format("DD_MM_YYYY_HH_mm_ss");
       var file_name = "download_" + CurrentDate + ".xlsx";
-
-      //var columnFilters = this.serverParams.columnFilters;
-
-
+ 
       return this.$http
         .get(
           baseURI +
-            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&code=${this.serverParams.columnFilters.code}&name=${this.serverParams.columnFilters.name}&country=${this.serverParams.columnFilters.country}&province=${this.serverParams.columnFilters.province}&city=${this.serverParams.columnFilters.city}&download=download`,
+            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&name=${this.serverParams.columnFilters.name}&email=${this.serverParams.columnFilters.email}&status=${this.serverParams.columnFilters.status}&division_id=${this.serverParams.columnFilters.division_id}&download=download`,
           {
             responseType: "blob",
           }
         )
         .then((response) => {
-         
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
 
@@ -282,72 +241,19 @@ export default {
         });
     },
 
-    // downloadData() {
-    //   this.fade(true);
-    //   var baseURI = this.$settings.endPoint + "/user/download";
-    //   var CurrentDate = this.$moment().format("DD_MM_YYYY_HH_mm_ss");
-    //   var columnFilters = this.serverParams.columnFilters;
-    //   var role = columnFilters["role.name"];
-    //   var company_code = columnFilters["company_detail.code"];
-
-    //   var sendData = {
-    //     username: this.serverParams.columnFilters.username,
-    //     name: this.serverParams.columnFilters.name,
-    //     email: this.serverParams.columnFilters.email,
-    //     level: this.serverParams.columnFilters.level,
-    //     status: this.serverParams.columnFilters.status,
-    //     role:role,
-    //     company_code: company_code,
-    //     file_name: "download_" + CurrentDate + ".xlsx",
-    //   };
-    //   this.$http({
-    //     url: baseURI,
-    //     method: "GET",
-    //     data: sendData,
-    //     responseType: "blob",
-    //   })
-    //     .then((response) => {
-    //       this.errors = [];
-    //       var filename = sendData.file_name;
-
-    //       var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-    //       var fileLink = document.createElement("a");
-
-    //       fileLink.href = fileURL;
-    //       fileLink.setAttribute("download", filename);
-    //       document.body.appendChild(fileLink);
-    //       fileLink.click();
-    //       this.fade(false);
-    //     })
-    //     .catch((error) => {
-    //       if (error.response) {
-    //         if (error.response.status === 422) {
-    //           this.errors = { message: ["File Not Found"] };
-    //           this.error("File Not Found");
-    //         } else if (error.response.status === 500) {
-    //           this.$router.push("/server-error");
-    //         } else {
-    //           this.$router.push("/page-not-found");
-    //         }
-    //       }
-    //     });
-    // },
+    
     createData() {
-      window.location.href = "/company/add";
-    },
-
-    uploadData(){
-      window.location.href = "/company/upload";
+      window.location.href = "/users/add";
     },
 
     editData(index, row) {
-      var params = this.$onRandom(row.company_id);
-      window.location.href = "/company/edit/" + params;
+      var params = this.$onRandom(row.user_id);
+      window.location.href = "/users/edit/" + params;
     },
 
     detailData(index, row) {
-      var params = this.$onRandom(row.company_id);
-      window.location.href = "/company/detail/" + params;
+      var params = this.$onRandom(row.user_id);
+      window.location.href = "/users/detail/" + params;
     },
 
     deleteData(index, row, status) {
@@ -364,12 +270,15 @@ export default {
             status: status,
           };
           const baseURI =
-            this.$settings.endPoint + "company/delete/" + row.company_id;
+            this.$settings.endPoint + "user/update-status/" + row.user_id;
           this.$http
-            .delete(baseURI, formData)
+            .put(baseURI, formData)
             .then((response) => {
               this.loading();
               if (response.data.status === 200) {
+                if(response.data.datas.credentials){
+                    setAuthToken(response.data.datas.credentials.access_token);
+                }
                 this.success(response.data.datas.messages);
                 this.loadItems();
               } else {
@@ -383,9 +292,11 @@ export default {
                 if (error.response.status === 422) {
                   this.errors = error.response.data.errors;
                   this.resultError(error.response.data.errors);
+                } else if (error.response.status === 401) {
+                  this.$router.push("/authorized-error");
                 } else if (error.response.status === 500) {
                   this.$router.push("/server-error");
-                } else {
+                }  else {
                   this.$router.push("/page-not-found");
                 }
               }
@@ -396,21 +307,37 @@ export default {
 
     // load items is what brings back the rows from server
     loadItems() {
-      const baseURI = this.$settings.endPoint + "company";
-
-      //var columnFilters = this.serverParams.columnFilters;
-
+      const baseURI = this.$settings.endPoint + "user/index";
+ 
+ 
 
       return this.$http
         .get(
-           baseURI +
-            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&code=${this.serverParams.columnFilters.code}&name=${this.serverParams.columnFilters.name}&country=${this.serverParams.columnFilters.country}&province=${this.serverParams.columnFilters.province}&city=${this.serverParams.columnFilters.city}&status=${this.serverParams.columnFilters.status}`,
+          baseURI +
+            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&division_id=${this.serverParams.columnFilters.division_id}&name=${this.serverParams.columnFilters.name}&email=${this.serverParams.columnFilters.email}&status=${this.serverParams.columnFilters.status}`
         )
         .then((response) => {
-         
-          this.rows = response.data.datas.data;
-          this.totalRecords = response.data.datas.total;
-        });
+            if(response.data.datas.credentials){
+                setAuthToken(response.data.datas.credentials.access_token);
+            }
+          this.rows = response.data.datas.data.data;
+          this.totalRecords = response.data.datas.data.total;
+        })
+            .catch((error) => {
+              this.loading();
+              if (error.response) {
+                if (error.response.status === 422) {
+                  this.errors = error.response.data.errors;
+                  this.resultError(error.response.data.errors);
+                } else if (error.response.status === 401) {
+                  this.$router.push("/authorized-error");
+                } else if (error.response.status === 500) {
+                  this.$router.push("/server-error");
+                }  else {
+                  this.$router.push("/page-not-found");
+                }
+              }
+            });
     },
 
     updateParams(newProps) {
@@ -498,8 +425,14 @@ export default {
     },
 
     fetchIt() {
-      const userDatas = this.$getUserInfo();
-      this.detailUser = userDatas.sub;
+      const userDatas     = this.$getUserInfo();
+      this.detailUser     = userDatas.sub;
+      
+
+      if(this.detailUser.level != "ROOT"){
+        this.$router.push("/authorized-error");
+      }
+
     },
 
     logout() {

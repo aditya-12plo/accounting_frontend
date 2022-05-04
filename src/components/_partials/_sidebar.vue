@@ -11,13 +11,7 @@
       <div class="sidebar-body">
         <ul class="nav">
           <li class="nav-item nav-category">{{ $t("MainTxt") }}</li>
-          <li class="nav-item active" v-if="this.classMenu == 'Dashboard'">
-            <a href="/dashboard" class="nav-link">
-              <i class="link-icon" data-feather="box"></i>
-              <span class="link-title">{{ $t("dashboardMenu") }}</span>
-            </a>
-          </li>
-          <li class="nav-item" v-else>
+          <li class="nav-item">
             <a href="/dashboard" class="nav-link">
               <i class="link-icon" data-feather="box"></i>
               <span class="link-title">{{ $t("dashboardMenu") }}</span>
@@ -59,31 +53,17 @@
               <span class="link-title">Chat</span>
             </a>
           </li>
-
-          <li class="nav-item nav-category">{{ $t("SupportTxt") }}</li>
-          <li class="nav-item active" v-if="this.classMenu == 'ContactUs'">
-            <a href="/contact-us" class="nav-link">
-              <i class="link-icon" data-feather="headphones"></i>
-              <span class="link-title">{{ $t("txtContactUs") }}</span>
-            </a>
-          </li>
-
-          <li class="nav-item" v-else>
-            <a href="/contact-us" class="nav-link">
-              <i class="link-icon" data-feather="headphones"></i>
-              <span class="link-title">{{ $t("txtContactUs") }}</span>
-            </a>
-          </li>
+ 
           <br>
           <span v-if="this.level == 'ROOT'">
             <li class="nav-item nav-category">{{ $t("AdministrationTxt") }}</li>
 
               <li class="nav-item">
-                  <a href="/company" class="nav-link">
-                    <i class="link-icon" data-feather="trello"></i>
-                    <span class="link-title">{{ $t("companyTxt") }}</span>
-                  </a>
-                </li>
+                <a href="/users" class="nav-link">
+                  <i class="link-icon" data-feather="trello"></i>
+                  <span class="link-title">{{ $t("txtUserSetting") }}</span>
+                </a>
+              </li>
  
 
    
@@ -123,14 +103,12 @@ export default {
       this.name = userDatas.sub.name;
       this.email = userDatas.sub.email;
       this.level = userDatas.sub.level;
-      //console.log(this.email);
     },
   },
   events: {},
   created: function () {},
   mounted() {
     this.fetchIt();
-    console.log(this.role);
   },
 };
 </script>

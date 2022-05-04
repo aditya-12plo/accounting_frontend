@@ -2,7 +2,7 @@
   <div>
     <div class="main-wrapper">
       <!--begin::sidebar-->
-      <sidebar-component classMenu="Role"></sidebar-component>
+      <sidebar-component classMenu="Users"></sidebar-component>
       <!--end::sidebar-->
 
       <div class="page-wrapper">
@@ -26,7 +26,7 @@
                 <div class="card-header">
                       <!-- <i class="link-icon float-start" data-feather="arrow-left"></i> -->
                        &nbsp;&nbsp;&nbsp;
-                      <h6 class="card-title mb-0 float-start">{{ $t("roleAdd") }}</h6>
+                      <h6 class="card-title mb-0 float-start">{{ $t("userAccessAdd") }}</h6>
                       <button
                         class="btn btn-default btn-sm float-end"
                         @click="resetForm"
@@ -64,18 +64,18 @@
                     
                     </div>
                     
-                    <div class="row mb-3">
+                     <div class="row mb-3">
                       <div class="col-lg-3">
                         <label for="defaultconfig" class="col-form-label">{{
-                          $t('roleNameTxt')
+                          $t("nameTxt")
                         }}</label>
                       </div>
                       <div class="col-lg-8">
                         <input
                           type="text"
                           class="form-control"
-                          id="name"
-                          :placeholder="$t('roleNameTxt')"
+                          id="nameTxt"
+                          :placeholder="$t('nameTxt')"
                           v-model="forms.name"
                           required
                         />
@@ -92,25 +92,27 @@
                         </div>
                       </div>
                     </div>
+ 
 
 
-                    <div class="row mb-3">
+                     <div class="row mb-3">
                       <div class="col-lg-3">
                         <label for="defaultconfig" class="col-form-label">{{
-                          $t('descriptionTxt')
+                          $t("emailAddress")
                         }}</label>
                       </div>
                       <div class="col-lg-8">
                         <input
-                          type="text"
+                          type="email"
                           class="form-control"
-                          id="description"
-                          :placeholder="$t('descriptionTxt')"
-                          v-model="forms.description"
+                          id="emailAddress"
+                          :placeholder="$t('emailAddress')"
+                          v-model="forms.email"
+                          required
                         />
-                        <div v-if="errors.description">
+                        <div v-if="errors.email">
                           <div
-                            v-for="error in errors.description"
+                            v-for="error in errors.email"
                             :key="error"
                             class="alert alert-primary"
                             role="alert"
@@ -122,6 +124,141 @@
                       </div>
                     </div>
 
+
+
+                     <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t("password")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="password"
+                          :placeholder="$t('password')"
+                          v-model="forms.password"
+                          required
+                        />
+                        <div v-if="errors.password">
+                          <div
+                            v-for="error in errors.password "
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t("DivisionTxt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                         <v-select v-model="forms.division_id" :options="this.fetchDivision" label="division_id" :placeholder="$t('DivisionTxt')" />
+ 
+
+                        <div v-if="errors.division_id">
+                          <div
+                            v-for="error in errors.division_id"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t("companyCode")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                         <v-select multiple v-model="forms.companys" :options="this.fetchCompany" label="company_id" :placeholder="$t('companyCode')" />
+                       
+                        <div v-if="errors.company_ids">
+                          <div
+                            v-for="error in errors.company_ids"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                    
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">{{
+                          $t("levelTxt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                         <v-select v-model="forms.level" :options="this.levels" :placeholder="$t('levelTxt')"/>
+ 
+
+                        <div v-if="errors.level">
+                          <div
+                            v-for="error in errors.level"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">
+                          Status
+                        </label>
+                      </div>
+                      <div class="col-lg-8">
+                         <v-select v-model="forms.status" :options="this.statuses" placeholder="Status"/>
+ 
+
+                        <div v-if="errors.status">
+                          <div
+                            v-for="error in errors.status"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
 
 
@@ -163,14 +300,16 @@
 import sidebarComponent from "@/components/_partials/_sidebar";
 import navbarComponent from "@/components/_partials/_navbar";
 import footerComponent from "@/components/_partials/_footer";
+import vSelect from 'vue-select'
 
 export default {
-  name: "RoleAdd",
+  name: "UsersAdd",
   props: {},
   components: {
     "sidebar-component": sidebarComponent,
     "navbar-component": navbarComponent,
     "footer-component": footerComponent,
+    "v-select": vSelect,
   },
   data() {
     return {
@@ -181,21 +320,55 @@ export default {
       errors: [],
       userData: "",
       companyCode: "",
-      forms: { name: "", usernmae: "" },
+      levels:["ROOT","STAFF"],
+      statuses:["active","deactived"],
+      fetchDivision:[],
+      fetchCompany:[],
+      permision_role:[],
+      forms: { name: "", email: "", division_id:"",companys:"",password:"",level:"",status:"" },
     };
   },
   watch: {},
   methods: {
     resetForm() {
+      this.forms.level = "";
       this.forms.name = "";
-      this.forms.description = "";
+      this.forms.password = "";
+      this.forms.email = "";
+      this.forms.companys = "";
+      this.forms.status = "";
+      this.forms.division_id = "";
     },
 
 
     backForm() {
-       window.location.href = "/role";
+       window.location.href = "/users";
     },
 
+    loadDivision() {
+      const baseURI = this.$settings.endPoint + "division/all";
+     
+      return this.$http
+        .get(
+          baseURI
+        )
+        .then((response) => {
+            this.fetchDivision=response.data.datas.data;
+        });
+    },
+
+
+    loadCompany() {
+      const baseURI = this.$settings.endPoint + "company/all";
+     
+      return this.$http
+        .get(
+          baseURI
+        )
+        .then((response) => {
+            this.fetchCompany=response.data.datas.data;
+        });
+    },
 
     submitData() {
       this.$swal({
@@ -207,22 +380,32 @@ export default {
         confirmButtonText: "Yes!",
       }).then((result) => {
         if (result.value) {
-          this.fade(true);
+            this.fade(true);
 
-          let formData = new FormData();
-          formData.append("name", this.forms.name);
-          formData.append("description", this.forms.description);
-       
-          const baseURI  =  this.$settings.endPoint+"role/create";
+            let company_ids = [];
+            this.forms.companys.forEach((value ) => {
+                    company_ids.push(value.company_id);
+                });
+ 
+
+            let formData = {
+                "name"          : this.forms.name,
+                "division_id"   : this.forms.division_id.division_id,
+                "password"      : this.forms.password,
+                "email"         : this.forms.email.trim(),
+                "company_ids"   : company_ids,
+                "level"         : this.forms.level,
+                "status"        : this.forms.status,
+            };
+ 
+
+            const baseURI  =  this.$settings.endPoint+"user/create";
           this.$http.post(baseURI,formData).then((response) => {
               this.loading();
               if(response.data.status === 200) {
-              this.resetForm();
-                  this.errors = [];
-                  //console.log(response.data.datas.user_id);
-                  var params = this.$onRandom(response.data.datas.role_id);
-                  window.location.href = "/role/detail/" + params;
-                  // this.success('Berhasil');
+                    this.resetForm();
+                    this.errors = [];
+                    this.success(response.data.datas.messages);
               }else{
                   this.errors = response.data.errors;
                   this.resultError(response.data.errors);
@@ -241,6 +424,7 @@ export default {
               }
               this.resetForm();
           });
+          
         }
       });
     },
@@ -302,11 +486,23 @@ export default {
         title: kata,
       });
     },
+    fetchIt() {
+      const userDatas     = this.$getUserInfo();
+      this.detailUser     = userDatas.sub;
+      
+
+      if(this.detailUser.level != "ROOT"){
+        this.$router.push("/authorized-error");
+      }
+
+    },
   },
   events: {},
   created: function () {},
   mounted() {
-
+    this.fetchIt();
+    this.loadDivision();
+    this.loadCompany();
   },
 };
 </script>
