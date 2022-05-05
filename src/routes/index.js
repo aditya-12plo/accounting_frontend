@@ -17,11 +17,12 @@ import UsersAdd from "@/components/users/Add.vue";
 import UsersEdit from "@/components/users/Edit.vue";
 import UsersDetail from "@/components/users/Detail.vue";
 
-// import Company from "@/components/administration/Company.vue";
-// import CompanyAdd from "@/components/administration/CompanyAdd.vue";
-// import CompanyDetail from "@/components/administration/CompanyDetail.vue";
-// import CompanyEdit from "@/components/administration/CompanyEdit.vue";
-// import CompanyUpload from "@/components/administration/CompanyUpload.vue";
+
+import CompanyIndex from "@/components/company/Index.vue";
+import CompanyAdd from "@/components/company/Add.vue";
+import CompanyDetail from "@/components/company/Detail.vue";
+import CompanyEdit from "@/components/company/Edit.vue";
+ 
 
 
 
@@ -160,6 +161,42 @@ const routes = [
     component:UsersDetail
   }, 
 
+  /**
+   * Administration/Company
+   */
+   {
+    path:'/company', 
+    meta: {
+      title: "Accounting & Budgeting System",
+    },
+    name: "CompanyIndex",
+    component:CompanyIndex
+  }, 
+  {
+   path:'/company/add', 
+   meta: {
+     title: "Accounting & Budgeting System",
+   },
+   name: "CompanyAdd",
+   component:CompanyAdd
+ }, 
+ {
+   path:'/company/detail/:id', 
+   meta: {
+     title: "Accounting & Budgeting System",
+   },
+   name: "CompanyDetail",
+   component:CompanyDetail
+ }, 
+ {
+   path:'/company/edit/:id', 
+   meta: {
+     title: "Accounting & Budgeting System",
+   },
+   name: "CompanyEdit",
+   component:CompanyEdit
+ }, 
+ 
   
 
 ];

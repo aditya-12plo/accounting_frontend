@@ -5,6 +5,8 @@
 
 const messages = {
     "en": {
+        company_id_txt:"Company ID",
+        company_name_txt:"Company Name",
         txtDivision:"User Division",
         txtPermissionRole:"User Permission Role",
         txtPermission:"Permission Master",
@@ -41,6 +43,7 @@ const messages = {
         permissionNameTxt : "Permission Name",
         txtMyProfile:"Profile",
         txtUserSetting:"User Setting",
+        txtCompanySetting:"Company Setting",
         txtUsers:"Users",
         txtLanguage:"Language",
         txtSignOut:"Sign Out",
@@ -87,6 +90,8 @@ const messages = {
         divisionCode:"Division Code",
         divisionDesc:"Division Description",
         wrongPasswordConfirm:"Password confirmation does not match",
+        companyAdd:"Add New Company",
+        companyDetail:"Detail Company",
         userAccess:"User Access",
         userAccessList:"List User Access",
         userAccessDetail:"Detail User Access",
@@ -101,6 +106,8 @@ const messages = {
         roleEdit:"Edit Role",
     },
     "id": {
+        company_id_txt:"ID Perusahaan",
+        company_name_txt:"Nama Perusahaan",
         txtDivision:"Divisi Pengguna",
         txtPermissionRole:"Pengaturan Izin Pengguna",
         txtPermission:"Data Master Izin",
@@ -150,6 +157,7 @@ const messages = {
         emailAddress : "Alamat Surel",
         txtMyProfile:"Profil Pengguna",
         txtUserSetting:"Pengaturan Pengguna",
+        txtCompanySetting:"Pengaturan Perusahaan",
         txtUsers:"Pengguna",
         txtLanguage:"Bahasa",
         txtSignOut:"Keluar",
@@ -183,6 +191,8 @@ const messages = {
         divisionCode:"Kode Divisi",
         divisionDesc:"Deskripsi Divisi",
         wrongPasswordConfirm:"Kata sandi konfirmasi tidak sama",
+        companyAdd:"Tambah Perusahaan Baru",
+        companyDetail:"Detail Perusahaan",
         userAccess:"Akses Pengguna",
         userAccessList:"Daftar Akses Pengguna",
         userAccessDetail:"Detail Akses Pengguna",

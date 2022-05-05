@@ -65,6 +65,12 @@
                 </a>
               </li>
  
+              <li class="nav-item">
+                <a href="/company" class="nav-link">
+                  <i class="link-icon" data-feather="airplay"></i>
+                  <span class="link-title">{{ $t("txtCompanySetting") }}</span>
+                </a>
+              </li>
 
    
  
