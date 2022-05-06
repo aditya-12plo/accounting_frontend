@@ -422,7 +422,6 @@ export default {
                   this.$router.push('/page-not-found');
               }
               }
-              this.resetForm();
           });
           
         }

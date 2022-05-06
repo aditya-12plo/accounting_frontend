@@ -5,6 +5,10 @@
 
 const messages = {
     "en": {
+        editData_txt:"Edit Data",
+        division_name_txt:"Division Name",
+        division_id_txt:"Division ID",
+        close_txt:"Close",
         company_id_txt:"Company ID",
         company_name_txt:"Company Name",
         txtDivision:"User Division",
@@ -44,6 +48,7 @@ const messages = {
         txtMyProfile:"Profile",
         txtUserSetting:"User Setting",
         txtCompanySetting:"Company Setting",
+        txtDivisionSetting:"Division Setting",
         txtUsers:"Users",
         txtLanguage:"Language",
         txtSignOut:"Sign Out",
@@ -106,6 +111,10 @@ const messages = {
         roleEdit:"Edit Role",
     },
     "id": {
+        editData_txt:"Rubah Data",
+        division_name_txt:"Nama Divisi",
+        division_id_txt:"ID Divisi",
+        close_txt:"Tutup",
         company_id_txt:"ID Perusahaan",
         company_name_txt:"Nama Perusahaan",
         txtDivision:"Divisi Pengguna",
@@ -158,6 +167,7 @@ const messages = {
         txtMyProfile:"Profil Pengguna",
         txtUserSetting:"Pengaturan Pengguna",
         txtCompanySetting:"Pengaturan Perusahaan",
+        txtDivisionSetting:"Pengaturan Divisi",
         txtUsers:"Pengguna",
         txtLanguage:"Bahasa",
         txtSignOut:"Keluar",

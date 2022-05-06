@@ -24,6 +24,7 @@ import CompanyDetail from "@/components/company/Detail.vue";
 import CompanyEdit from "@/components/company/Edit.vue";
  
 
+import DivisionIndex from "@/components/division/Index.vue";
 
 
 Vue.use(VueRouter);
@@ -197,6 +198,17 @@ const routes = [
    component:CompanyEdit
  }, 
  
+  /**
+   * Administration/Division
+   */
+   {
+    path:'/division', 
+    meta: {
+      title: "Accounting & Budgeting System",
+    },
+    name: "DivisionIndex",
+    component:DivisionIndex
+  }, 
   
 
 ];

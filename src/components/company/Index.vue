@@ -50,7 +50,7 @@
 
                 <div class="card-body">
                   <vue-good-table
-                    title="list-user"
+                    title="list-company"
                     mode="remote"
                     @on-page-change="onPageChange"
                     @on-sort-change="onSortChange"

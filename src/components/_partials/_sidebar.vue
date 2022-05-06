@@ -2,7 +2,7 @@
   <div>
     <nav class="sidebar">
       <div class="sidebar-header">
-        <a href="/dashboard" class="sidebar-brand"> <img src="/assets/images/icon_icdx.png" width="40px" height="40px"><span> ICDX </span></a>
+        <a href="/dashboard" class="sidebar-brand"> <img src="/assets/images/icon_icdx.png" width="40px" height="40px"><span> SYSTEM </span></a>
         <div class="sidebar-toggler not-active">
           <span></span><span></span><span></span>
         </div>
@@ -69,6 +69,13 @@
                 <a href="/company" class="nav-link">
                   <i class="link-icon" data-feather="airplay"></i>
                   <span class="link-title">{{ $t("txtCompanySetting") }}</span>
+                </a>
+              </li>
+ 
+              <li class="nav-item">
+                <a href="/division" class="nav-link">
+                  <i class="link-icon" data-feather="book"></i>
+                  <span class="link-title">{{ $t("txtDivisionSetting") }}</span>
                 </a>
               </li>
 
