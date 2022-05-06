@@ -27,14 +27,7 @@
                       <!-- <i class="link-icon float-start" data-feather="arrow-left"></i> -->
                        &nbsp;&nbsp;&nbsp;
                       <h6 class="card-title mb-0 float-start">Detail</h6>
-                      <button
-                        class="btn btn-default btn-sm float-end"
-                        @click="resetForm"
-                        type="button"
-                      >
-                      <i class="link-icon" data-feather="repeat"></i>
-                        {{ $t("resetFormTxt") }}
-                      </button>
+                      
                 </div>
                 <div class="card-body">
                   <!--begin::loading-data-->
@@ -210,6 +203,19 @@
                     <div class="row mb-3">
                       <div class="col-lg-3">
                         <label for="defaultconfig" class="col-form-label">
+                          {{$t("signature_txt")}}
+                        </label>
+                      </div>
+                      <div class="col-lg-8">
+                        <img v-if="forms.signature_file" :src="this.$settings.endPoint+'signature/'+this.forms.signature_file" width="300px" height="100px">
+                      </div>
+                    </div>
+
+
+                    
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">
                           Status
                         </label>
                       </div>
@@ -293,7 +299,7 @@ export default {
       fetchDivision:[],
       fetchCompany:[],
       permision_role:[],
-      forms: { name: "", email: "", division_id:"",companys:"",password:"",level:"",status:"" },
+      forms: { name: "", email: "", division_id:"",companys:"",password:"",level:"",status:"", signature_file:"" },
     };
   },
   watch: {},
@@ -483,6 +489,7 @@ export default {
             this.forms.status       = response.data.datas.data.status;
             this.forms.division_id  = response.data.datas.data.division_id;
             this.forms.level        = response.data.datas.data.level;
+            this.forms.signature_file = response.data.datas.data.signature_file;
         });
     },
   },

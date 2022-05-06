@@ -238,6 +238,39 @@
                     <div class="row mb-3">
                       <div class="col-lg-3">
                         <label for="defaultconfig" class="col-form-label">
+                          {{$t("signature_txt")}}
+                        </label>
+                      </div>
+                      <div class="col-lg-8">
+                          
+                        <input class="form-control" type="file" name="file_name" id="file_name" @change="onFileChange" v-on:change="uploadAvatar">
+                        <div v-if="file_url">
+                          <img v-if="file_url" :src="file_url" width="300px" height="100px">
+                        </div>
+                        <div v-else>
+                          <div v-if="this.forms.signature_file">
+                            <img :src="this.$settings.endPoint+'signature/'+this.forms.signature_file" width="300px" height="100px">
+                          </div>
+                        </div>
+                        
+                        <div v-if="errors.signature_file">
+                          <div
+                            v-for="error in errors.signature_file"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                    <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="defaultconfig" class="col-form-label">
                           Status
                         </label>
                       </div>
@@ -314,6 +347,8 @@ export default {
   },
   data() {
     return {
+      file_url: null,
+      file_name:'',
       isLoading: false,
       maxToasts: 100,
       position: "up right",
@@ -326,7 +361,7 @@ export default {
       fetchDivision:[],
       fetchCompany:[],
       permision_role:[],
-      forms: { name: "", email: "", division_id:"",companys:"",password:"",level:"",status:"" },
+      forms: { name: "", email: "", division_id:"",companys:"",password:"",level:"",status:"", signature_file:"" },
     };
   },
   watch: {},
@@ -339,8 +374,21 @@ export default {
       this.forms.companys = "";
       this.forms.status = "";
       this.forms.division_id = "";
+      this.file_name = '';
     },
 
+
+    onFileChange(e) {
+      const file = e.target.files[0];
+      this.file_url = URL.createObjectURL(file);
+    },
+
+    uploadAvatar(event) {
+
+      let files = event.target.files || event.dataTransfer.files;
+      if (files.length) this.file_name = files[0];
+                
+    },
 
     backForm() {
        window.location.href = "/users";
@@ -392,20 +440,21 @@ export default {
             if(!division_id){
               division_id = this.forms.division_id
             }
-            let formData = {
-                "name"          : this.forms.name,
-                "division_id"   : division_id,
-                "password"      : this.forms.password,
-                "email"         : this.forms.email.trim(),
-                "company_ids"   : company_ids,
-                "level"         : this.forms.level,
-                "status"        : this.forms.status,
-            };
+           
  
+            let formData = new FormData();
+            formData.set('name',  this.forms.name)
+            formData.set('division_id',  division_id)
+            formData.set('password',  this.forms.password)
+            formData.set('email',  this.forms.email.trim())
+            formData.set('company_ids',  JSON.stringify(company_ids))
+            formData.set('level',  this.forms.level)
+            formData.set('status',  this.forms.status)
+            formData.set('signature_file', this.file_name)
 
             var id = this.$onBehind(this.$route.params.id);
             const baseURI  =  this.$settings.endPoint+"user/update/"+id;
-          this.$http.put(baseURI,formData).then((response) => {
+          this.$http.post(baseURI,formData).then((response) => {
                 this.loading();
                 this.loadData();
               if(response.data.status === 200) {
@@ -521,6 +570,7 @@ export default {
             this.forms.status       = response.data.datas.data.status;
             this.forms.division_id  = response.data.datas.data.division_id;
             this.forms.level        = response.data.datas.data.level;
+            this.forms.signature_file        = response.data.datas.data.signature_file;
         });
     },
   },

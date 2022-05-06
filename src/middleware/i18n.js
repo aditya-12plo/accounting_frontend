@@ -109,6 +109,7 @@ const messages = {
         userAccessAdd:"Add New User Access",
         roleAdd:"Add Role",
         roleEdit:"Edit Role",
+        signature_txt:"Signature",
     },
     "id": {
         editData_txt:"Rubah Data",
@@ -215,6 +216,7 @@ const messages = {
         userAccessAdd:"Tambah Akses Pengguna Baru",
         roleAdd:"Tambah Hak Akses",
         roleEdit:"Ubah Hak Akses",
+        signature_txt:"Tanda Tangan",
        
        
 
