@@ -18,6 +18,15 @@
             </a>
           </li>
 
+
+          <li class="nav-item nav-category">{{ $t("dataMaster_txt") }}</li>
+          <li class="nav-item">
+            <a href="/vendor" class="nav-link">
+              <i class="link-icon" data-feather="git-merge"></i>
+              <span class="link-title">Vendor</span>
+            </a>
+          </li>
+
           <li class="nav-item nav-category">web apps</li>
           <li class="nav-item">
             <a

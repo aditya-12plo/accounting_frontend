@@ -26,6 +26,8 @@ import CompanyEdit from "@/components/company/Edit.vue";
 
 import DivisionIndex from "@/components/division/Index.vue";
 
+import VendorIndex from "@/components/vendor/Index.vue";
+
 
 Vue.use(VueRouter);
 
@@ -208,6 +210,19 @@ const routes = [
     },
     name: "DivisionIndex",
     component:DivisionIndex
+  }, 
+  
+ 
+  /**
+   * Vendor
+   */
+   {
+    path:'/vendor', 
+    meta: {
+      title: "Accounting & Budgeting System",
+    },
+    name: "VendorIndex",
+    component:VendorIndex
   }, 
   
 
