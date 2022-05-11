@@ -117,8 +117,10 @@ const messages = {
         roleAdd:"Add Role",
         roleEdit:"Edit Role",
         signature_txt:"Signature",
+        choose_txt:"Choose",
     },
     "id": {
+        choose_txt:"Pilihan",
         file_txt:"File",
         download_template_txt:"Unduh File Contoh",
         address_txt:"Alamat",

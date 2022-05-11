@@ -27,6 +27,34 @@
             </a>
           </li>
 
+
+          <li class="nav-item nav-category">{{ $t("choose_txt") }}</li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="collapse"
+              href="#companyCodeTxt"
+              role="button"
+              aria-expanded="false"
+              aria-controls="companyCodeTxt"
+            >
+              <i class="link-icon" data-feather="shuffle"></i>
+              <span class="link-title">{{ $t("companyCodeTxt") }}</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="companyCodeTxt">
+              <ul class="nav sub-menu">
+
+                <li class="nav-item" v-for="companyData in user_company" :key="companyData.company_id">
+                  <a href="#" @click="langCompanyChanged(companyData.company_id)" class="nav-link"> <span class="ms-1" style="color:#f16912;" v-if="company_default == companyData.company_id"> {{companyData.company_id}} </span> <span class="ms-1" v-else> {{companyData.company_id}} </span> </a>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+
+          
+
           <li class="nav-item nav-category">web apps</li>
           <li class="nav-item">
             <a
@@ -99,6 +127,7 @@
 
 
 <script>
+
 export default {
   name: "sidebarMenu",
   props: {
@@ -114,23 +143,32 @@ export default {
       name: "",
       email: "",
       level: "",
+      company_default:"",
+      user_company:"",
     };
   },
   watch: {},
   methods: {
  
+    langCompanyChanged(companyCode){
+      this.company_default          = companyCode;
+      localStorage.company_default  = companyCode;
+      window.location.reload();
+    },
 
     fetchIt() {
       const userDatas = this.$getUserInfo();
-      this.name = userDatas.sub.name;
-      this.email = userDatas.sub.email;
-      this.level = userDatas.sub.level;
+      this.name             = userDatas.sub.name;
+      this.email            = userDatas.sub.email;
+      this.level            = userDatas.sub.level;
+      this.company_default  = localStorage.getItem('company_default');
+      this.user_company     =  userDatas.sub.user_company;
     },
   },
   events: {},
   created: function () {},
   mounted() {
-    this.fetchIt();
+      this.fetchIt();
   },
 };
 </script>

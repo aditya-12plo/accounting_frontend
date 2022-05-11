@@ -43,21 +43,19 @@
                       <div class="auth-form-wrapper px-6 py-5">
                         
                         <img
-                          src="/assets/images/icdx-group.png"
+                          src="/assets/images/icon_icdx.png"
                           style="
                             display: block;
                             margin-left: auto;
                             margin-right: auto;
-                          "
-                          width="100%"
-                          height="100%"
+                          " width="40px" height="40px"
                         />
 
                         <a
                           href="#"
                           class="noble-ui-logo d-block mb-2"
                           style="text-align: center"
-                          ><span> BUDGETING SYSTEM</span></a
+                          ><span> SYSTEM</span></a
                         >
                         <h5
                           class="text-muted fw-normal mb-4"
@@ -126,6 +124,7 @@
                               id="company_id"
                               :placeholder="$t('companyCodeTxt')"
                               v-model="forms.company_id"
+                              @keyup="uppercase"
                               autofocus
                               required
                             />
@@ -248,6 +247,9 @@ export default {
     makeOffer() {
       
     },
+    uppercase() { 
+        this.forms.company_id  = this.forms.company_id.toUpperCase();
+    },
     submitData() {
       if (this.forms.captchaCode == this.code) {
         this.fade(true);
@@ -266,7 +268,7 @@ export default {
               this.loading();
               if (response.data.status === 200) {
                 setAuthToken(response.data.datas.access_token);
-                localStorage.setItem("user_company", JSON.stringify(response.data.datas.user_company));
+                localStorage.setItem("company_default", this.forms.company_id);
                 window.location.href = "/dashboard";
               } else {
                 this.forms.captchaCode = "";
