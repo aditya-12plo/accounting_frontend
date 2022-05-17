@@ -118,8 +118,44 @@ const messages = {
         roleEdit:"Edit Role",
         signature_txt:"Signature",
         choose_txt:"Choose",
+        budget_account_data_txt:"Budget Account Data",
+        system_code_txt:"System Code",
+        system_code_name_txt:"System Code Name",
+        sequence_txt:"Sequence",
+        value_txt:"Value",
+        description_en_txt:"Description On English",
+        create_by_txt:"Create By",
+        update_by_txt:"Update By",
+        accounting_coa_txt:"Accounting COA",
+        year_txt:"Year",
+        Budget_Account_Data_txt:"Budget Account Data",
+        Detail_Budget_Account_Data_txt:"Detail Budget Account Data",
+        name_txt:"Name",
+        description_txt:"Description",
+        Header_Budget_Account_Data_txt:"Header Budget Account Data",
+        column_txt:"Column",
+        created_at_txt:"Created At",
+        updated_at_txt:"Updated At",
     },
     "id": {
+        created_at_txt:"Waktu Dibuat",
+        updated_at_txt:"Waktu Diubah",
+        column_txt:"Kolom",
+        Header_Budget_Account_Data_txt:"Header Data Rekening Anggaran",
+        description_txt:"Keterangan",
+        name_txt:"Nama",
+        Detail_Budget_Account_Data_txt:"Detail Data Rekening Anggaran",
+        Budget_Account_Data_txt:"Data Rekening Anggaran",
+        year_txt:"Tahun",
+        accounting_coa_txt:"COA Akunting",
+        update_by_txt:"Dirubah Oleh",
+        create_by_txt:"Dibuat Oleh",
+        description_en_txt:"Keterangan Dalam Inggris",
+        value_txt:"Nilai",
+        sequence_txt:"Urutan",
+        system_code_name_txt:"Nama Kode System",
+        system_code_txt:"Kode System",
+        budget_account_data_txt:"Data Rekening Anggaran",
         choose_txt:"Pilihan",
         file_txt:"File",
         download_template_txt:"Unduh File Contoh",
@@ -232,12 +268,7 @@ const messages = {
         userAccessAdd:"Tambah Akses Pengguna Baru",
         roleAdd:"Tambah Hak Akses",
         roleEdit:"Ubah Hak Akses",
-        signature_txt:"Tanda Tangan",
-       
-       
-
-
-
+        signature_txt:"Tanda Tangan"
     }
 };
  

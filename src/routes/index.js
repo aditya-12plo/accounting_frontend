@@ -28,6 +28,11 @@ import DivisionIndex from "@/components/division/Index.vue";
 
 import VendorIndex from "@/components/vendor/Index.vue";
 
+import SystemCodeIndex from "@/components/system_code/Index.vue";
+
+import BudgetAccountYear from "@/components/rekening_anggaran/Index.vue"
+import BudgetAccountYearDetail from "@/components/rekening_anggaran/Detail.vue"
+import BudgetAccountYearSubDetail from "@/components/rekening_anggaran/SubDetail.vue"
 
 Vue.use(VueRouter);
 
@@ -225,6 +230,45 @@ const routes = [
     component:VendorIndex
   }, 
   
+  /**
+   * System Code
+   */
+  {
+    path:'/system-code', 
+    meta: {
+      title: "Accounting & Budgeting System",
+    },
+    name: "SystemCodeIndex",
+    component:SystemCodeIndex
+  }, 
+  
+  /**
+   * Rekening Anggaran
+   */
+  {
+    path:'/budget-account', 
+    meta: {
+      title: "Accounting & Budgeting System",
+    },
+    name: "BudgetAccountYear",
+    component:BudgetAccountYear
+  }, 
+  {
+    path:'/budget-account/detail/:id', 
+    meta: {
+      title: "Accounting & Budgeting System",
+    },
+    name: "BudgetAccountYearDetail",
+    component:BudgetAccountYearDetail
+  }, 
+  {
+    path:'/budget-account/sub-detail/:id', 
+    meta: {
+      title: "Accounting & Budgeting System",
+    },
+    name: "BudgetAccountYearSubDetail",
+    component:BudgetAccountYearSubDetail
+  }, 
 
 ];
 

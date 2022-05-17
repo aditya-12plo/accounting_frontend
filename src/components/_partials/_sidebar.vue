@@ -28,6 +28,23 @@
           </li>
 
 
+          <span v-if="this.level == 'ROOT' || this.division_id == 'ACCOUNTING'">
+          <li class="nav-item nav-category">Accounting</li>
+          <li class="nav-item">
+            <a href="/budget-account" class="nav-link">
+              <i class="link-icon" data-feather="command"></i>
+              <span class="link-title">{{$t("budget_account_data_txt")}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/accounting-coa" class="nav-link">
+              <i class="link-icon" data-feather="command"></i>
+              <span class="link-title">{{$t("accounting_coa_txt")}}</span>
+            </a>
+          </li>
+          </span>
+
+
           <li class="nav-item nav-category">{{ $t("choose_txt") }}</li>
           <li class="nav-item">
             <a
@@ -115,10 +132,19 @@
                   <span class="link-title">{{ $t("txtDivisionSetting") }}</span>
                 </a>
               </li>
+ 
+              <li class="nav-item">
+                <a href="/system-code" class="nav-link">
+                  <i class="link-icon" data-feather="codepen"></i>
+                  <span class="link-title">{{ $t("system_code_txt") }}</span>
+                </a>
+              </li>
 
    
  
           </span>
+
+
         </ul>
       </div>
     </nav>
@@ -143,6 +169,7 @@ export default {
       name: "",
       email: "",
       level: "",
+      division_id:"",
       company_default:"",
       user_company:"",
     };
@@ -161,6 +188,7 @@ export default {
       this.name             = userDatas.sub.name;
       this.email            = userDatas.sub.email;
       this.level            = userDatas.sub.level;
+      this.division_id      = userDatas.sub.division_id;
       this.company_default  = localStorage.getItem('company_default');
       this.user_company     =  userDatas.sub.user_company;
     },

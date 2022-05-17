@@ -1,0 +1,5 @@
+VUE_APP_NAME='Accounting System'
+VUE_APP_ENV=development
+VUE_APP_ENPOINT_APP=https://ab2c-180-243-25-180.ap.ngrok.io/
+VUE_APP_ENPOINT_BACKEND=https://ab2c-180-243-25-180.ap.ngrok.io/backend/
+VUE_APP_JWT_SECRET="[[[K3vL3RB3rD4R4H]]]"
