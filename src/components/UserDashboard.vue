@@ -35,7 +35,7 @@
 
                     <p>{{$t("dashboard_txt")}}</p>
 
-                    <p>{{ this.getTerbilang(120000) }}</p>
+                    <p>{{ this.getTerbilang(100) }}</p>
 
 
 
@@ -121,6 +121,7 @@ export default {
         this.$router.push('/');
       },
 
+
     },
     events: {
 
@@ -129,9 +130,10 @@ export default {
  
     },
 	mounted() {
-        this.fetchIt();
-        this.loading();
-    }
+    this.fetchIt();
+    this.loading();
+    
+  }
 
 }
 

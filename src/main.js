@@ -14,10 +14,15 @@ import router from "./routes";
 import store from "./store";
 import messages from "@/middleware/i18n";
 import VueI18n from "vue-i18n";
-import terbilang from "terbilang-js";
+// import Echo from 'laravel-echo';
+import VuePusher from 'vue-pusher';
+import Pusher from 'pusher-js';
+Pusher.logToConsole = true;
+
 import {onRandom,onBehind} from "@/middleware/hadish";
 import settings from '@/middleware/app';
 import addFunction from '@/middleware/addFunction';
+// import {budgetingNotif} from '@/middleware/notification';
 import {getAuthToken,getUserInfo,logoutUser,setAuthToken,setAuthLang} from '@/middleware/auth';
 
 
@@ -32,15 +37,21 @@ Vue.use(VueEvents);
 Vue.use(VueGoodTablePlugin);
 Vue.use(money, {precision: 4});
 Vue.use(VModal);
-Vue.use(VueI18n);
-Vue.use(terbilang);
-
-// global variable
+Vue.use(VueI18n); 
+Vue.use(VuePusher, {
+  api_key: '069df42e696753b20118',
+  options: {
+    cluster: 'ap1',
+    forceTLS: true
+  }
+});
+ 
+// global variable 
 Vue.prototype.$http             = Axios;
+// Vue.prototype.$budgetingNotif   = budgetingNotif;
 Vue.prototype.$accounting       = accounting;
 Vue.prototype.$moment           = moment;
 Vue.prototype.$settings         = settings;
-// Vue.prototype.$i18n = i18n;
 Vue.prototype.$addFunction      = addFunction;
 Vue.prototype.$getAuthToken     = getAuthToken;
 Vue.prototype.$getUserInfo      = getUserInfo;
