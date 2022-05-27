@@ -35,7 +35,7 @@
                     style="margin-right: 5px"
                     @click.prevent="createData()"
                   >
-                    <i class="link-icon" data-feather="plus"></i>
+                   <i class="mdi mdi-folder-plus" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("createNew") }}
                   </button>
                   <button
@@ -43,7 +43,7 @@
                     style="margin-right: 5px"
                     @click.prevent="downloadData()"
                   >
-                     <i class="link-icon" data-feather="download"></i>
+                    <i class="mdi mdi-download" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("downloadData") }} .xlsx
                   </button>
                 </div>
@@ -68,43 +68,27 @@
                   >
                     <template slot="table-row" slot-scope="props">
                       <span v-if="props.column.field == 'actions'">
+
+                          <a href="#" title="Detail" @click.prevent="detailData(props.index, props.row)" >
+                            <i class="mdi mdi-eye" style="font-size:16px;color:blue;"></i>
+                          </a>
+                    
                           
-                        <button
-                          class="btn btn-primary btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="detailData(props.index, props.row)"
-                        >
-                         
-                          Detail
-                        </button>
-                        <button
-                          class="btn btn-warning btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="editData(props.index, props.row)"
-                        >
+                          <a href="#" title="Edit" @click.prevent="editData(props.index, props.row)" >
+                           &nbsp; &nbsp;
+                            <i class="mdi mdi-square-edit-outline" style="font-size:16px"></i>
+                          </a> 
                           
-                          Edit
-                        </button>
-                        <button
-                          v-if="props.row.status === 'deactived'"
-                          class="btn btn-success btn-xs"
-                         style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="
-                            deleteData(props.index, props.row, 'active')
-                          "
-                        >
-                          Activate
-                        </button>
-                        <button
-                          v-if="props.row.status === 'active'"
-                          class="btn btn-danger btn-xs"
-                         style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="
-                            deleteData(props.index, props.row, 'deactived')
-                          "
-                        >
-                          Deactivated
-                        </button>
+                          <a href="#" title="Activate" v-if="props.row.status === 'deactived'" @click.prevent="deleteData(props.index, props.row, 'active')" >
+                           &nbsp; &nbsp;
+                            <i class="mdi mdi-lock-open" style="font-size:16px;color:red"></i>
+                          </a> 
+                          
+                          <a href="#" title="Deactivated" v-if="props.row.status === 'active'" @click.prevent="deleteData(props.index, props.row, 'deactived')" >
+                           &nbsp; &nbsp;
+                            <i class="mdi mdi-lock" style="font-size:16px;color:red"></i>
+                          </a> 
+    
                       </span>
                       <span v-else>
                         {{ props.formattedRow[props.column.field] }}
@@ -428,7 +412,7 @@ export default {
       const userDatas     = this.$getUserInfo();
       this.detailUser     = userDatas.sub;
       
-
+      console.log(this.detailUser);
       if(this.detailUser.level != "ROOT"){
         this.$router.push("/authorized-error");
       }

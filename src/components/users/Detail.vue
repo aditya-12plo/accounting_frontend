@@ -247,7 +247,7 @@
                         @click="backForm"
                         type="button"
                       >
-                      <i class="link-icon float-start" data-feather="arrow-left"></i>
+                     <i class="mdi mdi-arrow-left" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("backMess") }}
                       </button>
                       

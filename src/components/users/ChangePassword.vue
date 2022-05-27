@@ -61,9 +61,9 @@
 					</div>
                   
                     <div class="buttons">
-                        <button class="btn btn-warning" @click="resetForm" type="button">{{$t("resetFormTxt")}}</button>
+                        <button class="btn btn-warning" @click="resetForm" type="button"><i class="mdi mdi-repeat" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{$t("resetFormTxt")}}</button>
                         &nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-primary" type="submit">{{$t("submitFormTxt")}}</button>
+                        <button class="btn btn-primary" type="submit"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{$t("submitFormTxt")}}</button>
                     </div>
 </form>
 

@@ -193,6 +193,7 @@
                                 text-white
                               "
                             >
+                            <i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                               {{ $t("submitFormTxt") }}
                             </button>
                           </div>

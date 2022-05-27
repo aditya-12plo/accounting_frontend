@@ -36,7 +36,7 @@
                     style="margin-right: 5px"
                     @click.prevent="uploadData()"
                   >
-                     <i class="link-icon" data-feather="upload"></i>
+                     <i class="mdi mdi-upload" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("uploadData") }}
                   </button>
                   <button
@@ -45,7 +45,7 @@
                     style="margin-right: 5px"
                     @click.prevent="createData()"
                   >
-                    <i class="link-icon" data-feather="plus"></i>
+                     <i class="mdi mdi-folder-plus" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("createNew") }}
                   </button>
                   <button
@@ -53,7 +53,7 @@
                     style="margin-right: 5px"
                     @click.prevent="downloadData()"
                   >
-                     <i class="link-icon" data-feather="download"></i>
+                     <i class="mdi mdi-download" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("downloadData") }} .xlsx
                   </button>
                 </div>
@@ -79,24 +79,16 @@
                   >
                     <template slot="table-row" slot-scope="props">
                       <span v-if="props.column.field == 'actions'">
-                          
-                        <button
-                          class="btn btn-primary btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="detailData(props.index, props.row)"
-                        >
-                         
-                          Detail
-                        </button>
-                        <button
-                          v-if="detailUser.division_id == 'ACCOUNTING' || detailUser.level == 'ROOT'"
-                          class="btn btn-warning btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="editData(props.index, props.row)"
-                        >
-                          
-                          Edit
-                        </button>
+                        
+                        <a href="#" title="Detail" @click.prevent="detailData(props.index, props.row)" >
+                          <i class="mdi mdi-eye" style="font-size:16px;color:blue;"></i>
+                        </a> 
+                        
+                        <a href="#" v-if="detailUser.division_id == 'ACCOUNTING' || detailUser.level == 'ROOT'" title="Edit" @click.prevent="editData(props.index, props.row)" >
+                           &nbsp; &nbsp;
+                          <i class="mdi mdi-square-edit-outline" style="font-size:16px"></i>
+                        </a>
+  
                         
                       </span>
                       <span v-else>
@@ -144,6 +136,36 @@
                   </div>
                   <!--end::loading-data-->
                      
+                     <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="company_id_txt" class="col-form-label">{{
+                          $t("company_id_txt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="company_id"
+                          :placeholder="$t('company_id_txt')"
+                          v-model="company_default"
+                          @keyup="uppercase"
+                          disabled
+                        />
+                        <div v-if="errors.company_id">
+                          <div
+                            v-for="error in errors.company_id"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                      <div class="row mb-3">
                       <div class="col-lg-3">
                         <label for="vendor_name_txt" class="col-form-label">{{
@@ -259,7 +281,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
  
     </modal>
@@ -280,6 +302,35 @@
 
       <div class="modal-body">
         
+                     <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="company_id_txt" class="col-form-label">{{
+                          $t("company_id_txt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="company_id"
+                          :placeholder="$t('company_id_txt')"
+                          v-model="company_default"
+                          @keyup="uppercase"
+                          disabled
+                        />
+                        <div v-if="errors.company_id">
+                          <div
+                            v-for="error in errors.company_id"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
         
                      <div class="row mb-3">
                       <div class="col-lg-3">
@@ -395,8 +446,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  
@@ -431,6 +482,36 @@
         
                      <div class="row mb-3">
                       <div class="col-lg-3">
+                        <label for="company_id_txt" class="col-form-label">{{
+                          $t("company_id_txt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="company_id"
+                          :placeholder="$t('company_id_txt')"
+                          v-model="company_default"
+                          @keyup="uppercase"
+                          disabled
+                        />
+                        <div v-if="errors.company_id">
+                          <div
+                            v-for="error in errors.company_id"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                     <div class="row mb-3">
+                      <div class="col-lg-3">
                         <label for="vendor_name_txt" class="col-form-label">{{
                           $t("vendor_name_txt")
                         }}</label>
@@ -544,8 +625,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  
@@ -580,6 +661,36 @@
                   </div>
                   <!--end::loading-data-->
          
+                     <div class="row mb-3">
+                      <div class="col-lg-3">
+                        <label for="company_id_txt" class="col-form-label">{{
+                          $t("company_id_txt")
+                        }}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="company_id"
+                          :placeholder="$t('company_id_txt')"
+                          v-model="company_default"
+                          @keyup="uppercase"
+                          disabled
+                        />
+                        <div v-if="errors.company_id">
+                          <div
+                            v-for="error in errors.company_id"
+                            :key="error"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            <i data-feather="alert-circle"></i>
+                            {{ error }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                      <div class="row mb-3">
                       <div class="col-lg-3">
                         <label for="file_txt" class="col-form-label">{{
@@ -663,8 +774,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  
@@ -700,6 +811,7 @@ export default {
         },
         primaryKey:"",
         file_name:"",
+        company_default:"",
         maxToasts: 100,
         position: "up right",
         closeBtn: true,
@@ -707,7 +819,7 @@ export default {
         errors: [],
         errorsShow: [],
         langs: ["id", "en"],
-        forms: { vendor_id:"", name: "", address: "", npwp_no:"", balance:0, created_at:"",updated_at:"" },
+        forms: { vendor_id:"", company_id:"", name: "", address: "", npwp_no:"", balance:0, created_at:"",updated_at:"" },
         detailUser: [],
         uploadResponse:[],
         detailDivisi: [],
@@ -722,6 +834,17 @@ export default {
             per_page: 10,
         },
         columns: [
+            {
+            label: "Company Id",
+            field: "company_id",
+            filterOptions: {
+                enabled: false, // enable filter for this column
+                placeholder: "Filter By Name", // placeholder for filter input
+                filterValue: "", // initial populated value for this filter
+                filterDropdownItems: [], // dropdown (with selected values) instead of text input
+                trigger: "enter", //only trigger on enter not on keyup
+            },
+            },
             {
             label: "Name",
             field: "name",
@@ -820,6 +943,7 @@ export default {
  
 
             let formData = new FormData();
+            formData.set('company_id', this.company_default)
             formData.set('file', this.file_name)
 
             const baseURI  =  this.$settings.endPoint+"vendor/upload";
@@ -907,7 +1031,7 @@ export default {
         if (result.value) {
             this.fade(true);
              
-             
+             this.forms.company_id = this.company_default
             const baseURI  =  this.$settings.endPoint+"vendor/create";
             this.$http.post(baseURI,this.forms).then((response) => {
               this.loading();
@@ -939,11 +1063,12 @@ export default {
     },
     resetForm() {
         this.forms.vendor_id        = ""
+        this.forms.company_id       = ""
         this.forms.name             = ""
         this.forms.address          = ""
         this.forms.balance          = 0
         this.forms.npwp_no          = ""
-        this.file_name                = '';
+        this.file_name              = '';
         this.uploadResponse         = [];
         this.errors                 = [];
         this.errorsShow             = []
@@ -957,10 +1082,11 @@ export default {
       var CurrentDate = this.$moment().format("DD_MM_YYYY_HH_mm_ss");
       var file_name = "download_" + CurrentDate + ".xlsx";
  
+      const company_id  = localStorage.getItem('company_default');
       return this.$http
         .get(
           baseURI +
-            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&name=${this.serverParams.columnFilters.name}&npwp_no=${this.serverParams.columnFilters.npwp_no}&address=${this.serverParams.columnFilters.address}&download=download`,
+            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&company_id=${company_id}&name=${this.serverParams.columnFilters.name}&npwp_no=${this.serverParams.columnFilters.npwp_no}&address=${this.serverParams.columnFilters.address}&download=download`,
           {
             responseType: "blob",
           }
@@ -1014,6 +1140,7 @@ export default {
     editData(index, row) {
         this.errors             = [];
         this.forms.vendor_id    = row.vendor_id
+        this.forms.company_id   = row.company_id
         this.forms.name         = row.name
         this.forms.address      = row.address
         this.forms.npwp_no      = row.npwp_no
@@ -1025,6 +1152,7 @@ export default {
 
     detailData(index, row) {
         this.errors             = [];
+        this.forms.company_id   = row.company_id
         this.forms.vendor_id    = row.vendor_id
         this.forms.name         = row.name
         this.forms.address      = row.address
@@ -1040,11 +1168,12 @@ export default {
       const baseURI = this.$settings.endPoint + "vendor/index";
  
  
+      const company_id  = localStorage.getItem('company_default');
 
       return this.$http
         .get(
           baseURI +
-            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&name=${this.serverParams.columnFilters.name}&address=${this.serverParams.columnFilters.address}&npwp_no=${this.serverParams.columnFilters.npwp_no}`
+            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&company_id=${company_id}&name=${this.serverParams.columnFilters.name}&address=${this.serverParams.columnFilters.address}&npwp_no=${this.serverParams.columnFilters.npwp_no}`
         )
         .then((response) => {
             if(response.data.datas.credentials){
@@ -1174,6 +1303,7 @@ export default {
       
       const userDatas       = this.$getUserInfo();
       this.detailUser       = userDatas.sub;
+      this.company_default  = localStorage.getItem('company_default');
       
 
     },

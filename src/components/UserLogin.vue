@@ -186,6 +186,7 @@
                                 text-white
                               "
                             >
+                             <i class="mdi mdi-login" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                               {{ $t("txtLogin") }}
                             </button>
                           </div>

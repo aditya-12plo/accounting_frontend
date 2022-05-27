@@ -32,7 +32,7 @@
                         @click="resetForm"
                         type="button"
                       >
-                      <i class="link-icon" data-feather="repeat"></i>
+                      <i class="mdi mdi-repeat" style="font-size:1rem;color:black;vertical-align: middle;"></i>
                         {{ $t("resetFormTxt") }}
                       </button>
                 </div>
@@ -171,12 +171,12 @@
                         @click="backForm"
                         type="button"
                       >
-                      <i class="link-icon float-start" data-feather="arrow-left"></i>
+                      <i class="mdi mdi-arrow-left" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("backMess") }}
                       </button>
                       &nbsp;&nbsp;&nbsp;
                       <button class="btn btn-primary float-end btn-sm" type="submit">
-                           <i class="link-icon" data-feather="save"></i>
+                          <i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("submitFormTxt") }}
                       </button>
                     </div>

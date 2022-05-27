@@ -14,6 +14,7 @@ import router from "./routes";
 import store from "./store";
 import messages from "@/middleware/i18n";
 import VueI18n from "vue-i18n";
+import terbilang from "terbilang-js";
 import {onRandom,onBehind} from "@/middleware/hadish";
 import settings from '@/middleware/app';
 import addFunction from '@/middleware/addFunction';
@@ -32,6 +33,7 @@ Vue.use(VueGoodTablePlugin);
 Vue.use(money, {precision: 4});
 Vue.use(VModal);
 Vue.use(VueI18n);
+Vue.use(terbilang);
 
 // global variable
 Vue.prototype.$http             = Axios;

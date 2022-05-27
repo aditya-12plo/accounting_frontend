@@ -37,7 +37,7 @@
                     style="margin-right: 5px"
                     @click.prevent="downloadData()"
                   >
-                     <i class="link-icon" data-feather="download"></i>
+                     <i class="mdi mdi-download" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("downloadData") }} .xlsx
                   </button>
 
@@ -47,7 +47,7 @@
                     style="margin-right: 5px"
                     @click.prevent="uploadData()"
                   >
-                     <i class="link-icon" data-feather="upload"></i>
+                     <i class="mdi mdi-upload" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("uploadData") }}
                   </button>
 
@@ -57,7 +57,7 @@
                     style="margin-right: 5px"
                     @click.prevent="createData()"
                   >
-                    <i class="link-icon" data-feather="plus"></i>
+                     <i class="mdi mdi-folder-plus" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("createNew") }}
                   </button>
                    
@@ -66,7 +66,7 @@
                     style="margin-right: 5px"
                     @click.prevent="backForm()"
                   >
-                      <i class="link-icon" data-feather="arrow-left"></i>
+                     <i class="mdi mdi-arrow-left" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("backMess") }}
                   </button>
 
@@ -74,7 +74,7 @@
 
                 <div class="card-body">
                   <vue-good-table
-                    title="list-budget-header"
+                    title="list-budget-sub-detail"
                     mode="remote"
                     @on-page-change="onPageChange"
                     @on-sort-change="onSortChange"
@@ -94,34 +94,23 @@
                     <template slot="table-row" slot-scope="props">
                       <span v-if="props.column.field == 'actions'">
                           
-                        <button
-                          class="btn btn-primary btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="detailData(props.index, props.row)"
-                        >
-                         
-                          Detail
-                        </button>
-                        <button
-                            v-if="headerDatas.status == 'draft'"
-                          class="btn btn-warning btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="editData(props.index, props.row)"
-                        >
+                           <a href="#" title="Detail" @click.prevent="detailData(props.index, props.row)" >
+                            <i class="mdi mdi-eye" style="font-size:16px;color:blue;"></i>
+                          </a>
+                   
                           
-                          Edit
-                        </button>
-                  
+                          <a href="#" v-if="headerDatas.status == 'draft'" title="Edit" @click.prevent="editData(props.index, props.row)" >
+                             &nbsp; &nbsp;
+                            <i class="mdi mdi-square-edit-outline" style="font-size:16px"></i>
+                          </a>
+                   
+                          
+                          <a href="#" v-if="headerDatas.status == 'draft'" title="Delete" @click.prevent="deleteData(props.index, props.row)" >
+                             &nbsp; &nbsp;
+                            <i class="mdi mdi-delete-forever" style="font-size:16px;color:red"></i>
+                          </a> 
 
-                        <button
-                            v-if="headerDatas.status == 'draft'"
-                          class="btn btn-danger btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="deleteData(props.index, props.row)"
-                        >
-                          
-                          Delete
-                        </button>
+ 
                        
                         
                       </span>
@@ -302,8 +291,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  
@@ -589,7 +578,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
  
     </modal>
@@ -754,8 +743,8 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  
@@ -874,8 +863,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  

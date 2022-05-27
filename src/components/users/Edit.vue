@@ -27,14 +27,7 @@
                       <!-- <i class="link-icon float-start" data-feather="arrow-left"></i> -->
                        &nbsp;&nbsp;&nbsp;
                       <h6 class="card-title mb-0 float-start">Detail</h6>
-                      <button
-                        class="btn btn-default btn-sm float-end"
-                        @click="resetForm"
-                        type="button"
-                      >
-                      <i class="link-icon" data-feather="repeat"></i>
-                        {{ $t("resetFormTxt") }}
-                      </button>
+                      
                 </div>
                 <div class="card-body">
                   <!--begin::loading-data-->
@@ -215,7 +208,7 @@
                         }}</label>
                       </div>
                       <div class="col-lg-8">
-                         <v-select v-model="forms.level" :options="this.levels" :placeholder="$t('levelTxt')" />
+                         <v-select v-model="forms.level" :options="this.levels" return-object @search="asyncSearchData" :placeholder="$t('levelTxt')" />
  
 
                         <div v-if="errors.level">
@@ -302,12 +295,12 @@
                         @click="backForm"
                         type="button"
                       >
-                      <i class="link-icon float-start" data-feather="arrow-left"></i>
+                     <i class="mdi mdi-arrow-left" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("backMess") }}
                       </button>
                       &nbsp;&nbsp;&nbsp;
                       <button class="btn btn-primary float-end btn-sm" type="submit">
-                           <i class="link-icon" data-feather="save"></i>
+                     <i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("submitFormTxt") }}
                       </button>
                       
@@ -356,7 +349,7 @@ export default {
       errors: [],
       userData: "",
       companyCode: "",
-      levels:["ROOT","STAFF"],
+      levels:[],
       statuses:["active","deactived"],
       fetchDivision:[],
       fetchCompany:[],
@@ -552,6 +545,17 @@ export default {
 
     },
 
+    asyncSearchData(ev){
+      
+      if(!ev){
+        ev = ""
+      }
+      const baseURI = this.$settings.endPoint + "system-code/get-all-by-system-code?system_code=USERLEVEL&value="+ev;
+
+      return this.$http.get(baseURI).then((response) => {
+        this.levels = response.data.datas.data;
+      });
+    },
 
     loadData() {
       var id = this.$onBehind(this.$route.params.id);
@@ -581,6 +585,7 @@ export default {
     this.loadData();
     this.loadDivision();
     this.loadCompany();
+    this.asyncSearchData();
   },
 };
 </script>

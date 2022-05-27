@@ -45,6 +45,10 @@
           </span>
 
 
+          <li class="nav-item nav-category">{{ $t("budgeting_txt") }}</li>
+
+
+
           <li class="nav-item nav-category">{{ $t("choose_txt") }}</li>
           <li class="nav-item">
             <a
@@ -71,7 +75,7 @@
           </li>
 
           
-
+<!--
           <li class="nav-item nav-category">web apps</li>
           <li class="nav-item">
             <a
@@ -107,6 +111,8 @@
               <span class="link-title">Chat</span>
             </a>
           </li>
+-->
+
  
           <br>
           <span v-if="this.level == 'ROOT'">

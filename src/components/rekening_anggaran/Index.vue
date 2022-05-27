@@ -36,7 +36,7 @@
                     style="margin-right: 5px"
                     @click.prevent="createData()"
                   >
-                    <i class="link-icon" data-feather="plus"></i>
+                     <i class="mdi mdi-folder-plus" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                     {{ $t("createNew") }}
                   </button>
                    
@@ -63,33 +63,27 @@
                   >
                     <template slot="table-row" slot-scope="props">
                       <span v-if="props.column.field == 'actions'">
-                        <button
-                          class="btn btn-primary btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="detailData(props.index, props.row)"
-                        >
-                         
-                          Detail
-                        </button>
-                        <button
-                          v-if="props.row.status == 'draft' || props.row.status == 'cancelled' || detailUser.level == 'ROOT'"
-                          class="btn btn-warning btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="editData(props.index, props.row)"
-                        >
+
+
+
+
+                        <a href="#" title="Detail" @click.prevent="detailData(props.index, props.row)" >
+                            <i class="mdi mdi-eye" style="font-size:16px;color:blue;"></i>
+                          </a>
+                   
                           
-                          Edit
-                        </button>
-                  
-                      
-                        <button
-                          class="btn btn-info btn-xs"
-                          style="margin-right: 5px ; margin-bottom: 5px"
-                          @click.prevent="downloadData(props.index, props.row)"
-                        >
+                          <a href="#"  v-if="props.row.status == 'draft' || props.row.status == 'cancelled' || detailUser.level == 'ROOT'" title="Edit" @click.prevent="editData(props.index, props.row)" >
+                             &nbsp; &nbsp;
+                            <i class="mdi mdi-square-edit-outline" style="font-size:16px"></i>
+                          </a>
+                   
                           
-                          Download
-                        </button>
+                          <a href="#" title="Download" @click.prevent="downloadData(props.index, props.row)" >
+                             &nbsp; &nbsp;
+                            <i class="mdi mdi-cloud-download" style="font-size:16px;color:greenyellow"></i>
+                          </a> 
+
+                             
                         
                       </span>
                       <span v-else>
@@ -193,8 +187,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  
@@ -251,8 +245,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">{{ $t("submitFormTxt") }}</button>
-        <button type="button" class="btn btn-secondary" @click="hideModal()">{{ $t("close_txt") }}</button>
+        <button type="submit" class="btn btn-primary"><i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("submitFormTxt") }}</button>
+        <button type="button" class="btn btn-secondary" @click="hideModal()"><i class="mdi mdi-window-close" style="font-size:1rem;color:white;vertical-align: middle;"></i> {{ $t("close_txt") }}</button>
       </div>
 </form>
  
@@ -289,7 +283,7 @@ export default {
         company_default:"",
         statuses:["draft","locked","cancelled"],
         uploadResponse:[],
-        forms: { budget_year_id:"", company_id: "", year:"", status:"",create_by:"",update_by:"", created_at:"",updated_at:"" },
+        forms: { budget_year_id:"", year:"", status:"",create_by:"",update_by:"", created_at:"",updated_at:"" },
         file_name:"",
         maxToasts: 100,
         position: "up right",
@@ -378,7 +372,6 @@ export default {
         if (result.value) {
             this.fade(true);
              
-             this.forms.company_id = this.company_default
             const baseURI  =  this.$settings.endPoint+"budget-year/create";
             this.$http.post(baseURI,this.forms).then((response) => {
               this.loading();
@@ -418,14 +411,12 @@ export default {
       }
     },
     uppercase() { 
-        this.forms.year             = this.forms.company_id.toUpperCase();
         this.forms.year             = this.forms.year.trim();
     },
       
  
     resetForm() {
         this.forms.budget_year_id           = ""
-        this.forms.company_id               = ""
         this.forms.year                     = ""
         this.forms.status                   = ""
         this.forms.create_by                = ""
@@ -450,7 +441,7 @@ export default {
   
     downloadData(index, row) {
       const baseURI = this.$settings.endPoint + "budget-year/download-data-detail/"+row.budget_year_id;
-      var file_name = row.company_id+"_download_" + row.year + ".xlsx";
+      var file_name = "download_" + row.year + ".xlsx";
  
       return this.$http
         .get(
@@ -489,7 +480,6 @@ export default {
         if (result.value) {
             this.fade(true);
             
-             this.forms.company_id = this.company_default
             const baseURI  =  this.$settings.endPoint+"budget-year/update/"+this.forms.budget_year_id;
             this.$http.put(baseURI,this.forms).then((response) => {
               this.loading();
@@ -521,7 +511,6 @@ export default {
     editData(index, row) {
         this.errors                   = [];
         this.forms.budget_year_id     = row.budget_year_id
-        this.forms.system_code        = row.company_id
         this.forms.status             = row.status
         this.forms.year               = row.year
         this.forms.create_by          = row.create_by
@@ -540,11 +529,10 @@ export default {
     // load items is what brings back the rows from server
     loadItems() {
       const baseURI = this.$settings.endPoint + "budget-year/index";
-        let company_id = localStorage.getItem('company_default')
       return this.$http
         .get(
           baseURI +
-            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&company_id=${company_id}&year=${this.serverParams.columnFilters.year}&status=${this.serverParams.columnFilters.status}&create_by=${this.serverParams.columnFilters.create_by}&update_by=${this.serverParams.columnFilters.update_by}`
+            `?per_page=${this.serverParams.per_page}&page=${this.serverParams.page}&sort_field=${this.serverParams.sort.field}&sort_type=${this.serverParams.sort.type}&year=${this.serverParams.columnFilters.year}&status=${this.serverParams.columnFilters.status}&create_by=${this.serverParams.columnFilters.create_by}&update_by=${this.serverParams.columnFilters.update_by}`
         )
         .then((response) => {
             if(response.data.datas.credentials){

@@ -32,7 +32,7 @@
                         @click="resetForm"
                         type="button"
                       >
-                      <i class="link-icon" data-feather="repeat"></i>
+                      <i class="mdi mdi-repeat" style="font-size:1rem;color:black;vertical-align: middle;"></i>
                         {{ $t("resetFormTxt") }}
                       </button>
                 </div>
@@ -216,7 +216,7 @@
                         }}</label>
                       </div>
                       <div class="col-lg-8">
-                         <v-select v-model="forms.level" :options="this.levels" :placeholder="$t('levelTxt')"/>
+                         <v-select v-model="forms.level" :options="this.levels" return-object @search="asyncSearchData" :placeholder="$t('levelTxt')"/>
  
 
                         <div v-if="errors.level">
@@ -295,12 +295,12 @@
                         @click="backForm"
                         type="button"
                       >
-                      <i class="link-icon float-start" data-feather="arrow-left"></i>
+                     <i class="mdi mdi-arrow-left" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("backMess") }}
                       </button>
                       &nbsp;&nbsp;&nbsp;
                       <button class="btn btn-primary float-end btn-sm" type="submit">
-                           <i class="link-icon" data-feather="save"></i>
+                     <i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("submitFormTxt") }}
                       </button>
                     </div>
@@ -347,7 +347,7 @@ export default {
       errors: [],
       userData: "",
       companyCode: "",
-      levels:["ROOT","STAFF"],
+      levels:[],
       statuses:["active","deactived"],
       fetchDivision:[],
       fetchCompany:[],
@@ -479,6 +479,20 @@ export default {
       }, 1000); // hide the message after 3 seconds
     },
 
+
+
+    asyncSearchData(ev){
+      
+      if(!ev){
+        ev = ""
+      }
+      const baseURI = this.$settings.endPoint + "system-code/get-all-by-system-code?system_code=USERLEVEL&value="+ev;
+
+      return this.$http.get(baseURI).then((response) => {
+        this.levels = response.data.datas.data;
+      });
+    },
+
     resultError(data) {
       var count = Object.keys(data).length;
       for (var x = 0; x < count; x++) {
@@ -542,6 +556,7 @@ export default {
     this.fetchIt();
     this.loadDivision();
     this.loadCompany();
+    this.asyncSearchData();
   },
 };
 </script>

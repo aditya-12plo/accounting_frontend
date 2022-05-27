@@ -26,15 +26,8 @@
                 <div class="card-header">
                       <!-- <i class="link-icon float-start" data-feather="arrow-left"></i> -->
                        &nbsp;&nbsp;&nbsp;
-                      <h6 class="card-title mb-0 float-start">{{ $t("companyDetail") }}</h6>
-                      <button
-                        class="btn btn-default btn-sm float-end"
-                        @click="resetForm"
-                        type="button"
-                      >
-                      <i class="link-icon" data-feather="repeat"></i>
-                        {{ $t("resetFormTxt") }}
-                      </button>
+                      <h6 class="card-title mb-0 float-start">{{ $t("companyEdit") }}</h6>
+                       
                 </div>
                 <div class="card-body">
                   <!--begin::loading-data-->
@@ -171,12 +164,12 @@
                         @click="backForm"
                         type="button"
                       >
-                      <i class="link-icon float-start" data-feather="arrow-left"></i>
+                      <i class="mdi mdi-arrow-left" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("backMess") }}
                       </button>
                       &nbsp;&nbsp;&nbsp;
                       <button class="btn btn-primary float-end btn-sm" type="submit">
-                           <i class="link-icon" data-feather="save"></i>
+                     <i class="mdi mdi-content-save" style="font-size:1rem;color:white;vertical-align: middle;"></i>
                         {{ $t("submitFormTxt") }}
                       </button>
                     </div>
