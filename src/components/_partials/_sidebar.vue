@@ -49,6 +49,12 @@
 
 
 
+          <li class="nav-item nav-category">{{ $t("approval_budgeting_txt") }}</li>
+
+
+          <li class="nav-item nav-category">{{ $t("payment_budgeting_txt") }}</li>
+
+
           <li class="nav-item nav-category">{{ $t("choose_txt") }}</li>
           <li class="nav-item">
             <a

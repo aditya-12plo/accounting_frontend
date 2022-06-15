@@ -139,8 +139,12 @@ const messages = {
         updated_at_txt:"Updated At",
         budgeting_txt:"Budget Proposal",
         dashboard_txt:"This system is useful to make it easier for ICDX Group employees for monitor and manage budget in real time and can use from anywhere. ",
+        approval_budgeting_txt:"Approval Budgeting",
+        payment_budgeting_txt:"Payment Budgeting",
     },
     "id": {
+        payment_budgeting_txt:"Pembayaran Anggaran",
+        approval_budgeting_txt:"Persetujuan Anggaran",
         dashboard_txt:"Sistem ini berguna untuk memudahkan karyawan ICDX Group dalam monitoring dan pengelolaan anggran secara real time dan di lakukan dimana saja. ",
         budgeting_txt:"Usulan Anggaran",
         created_at_txt:"Waktu Dibuat",
